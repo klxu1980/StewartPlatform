@@ -1,0 +1,55 @@
+//---------------------------------------------------------------------------
+
+#ifndef CameraH
+#define CameraH
+#include <vector>
+#include <math.h>
+using namespace std;
+//---------------------------------------------------------------------------
+struct C3dPoint
+{
+public:
+   float X;
+   float Y;
+   float Z;
+public:
+   C3dPoint(float X, float Y, float Z)
+   : X(X), Y(Y), Z(Z) {}
+};
+struct C2dPoint
+{
+public:
+   float X;
+   float Y;
+public:
+   C2dPoint(float X, float Y)
+   : X(X), Y(Y){}
+};
+
+class CCamera
+{
+public:
+   float L;              // 相机焦距
+   float PixelPerMM;     // 像素密度(1mm尺度上包含的像素数量)
+public:
+   float Radius;         // 圆半径
+   float CenterX;        // 圆中心坐标
+   float CenterY;
+   float CenterZ;
+   float RX;             // 圆平面欧拉角(滚转角)
+   float RY;             // 俯仰角
+private:
+   float __MaxXAlpha;
+public:
+   vector<C2dPoint> Image;
+private:  public:
+   void FindMaxXAlpha(void);
+public:
+   CCamera(void) : L(15), PixelPerMM(300) {}
+public:
+   double    Degree2Rad(double Degree){return M_PI * Degree / 180.0;}
+   C2dPoint  Trans3dTo2d(float Radius, float Alpha);
+   C2dPoint  CalcImagePoint(float Alpha);
+   void      CalcCycleImage(float DAlpha = 0.5);
+};
+#endif

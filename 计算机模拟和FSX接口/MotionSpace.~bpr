@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="MotionSpace.exe"/>
+    <OBJFILES value="MotionSpace.obj Unit1.obj RobotImage.obj D3Types.obj gaussj.obj 
+      TRangeDlg.obj SimplexMethod.obj ParallelRobot.obj 
+      ..\RobotCtrl\CtrlSystem.obj ..\RobotCtrl\MotionSimulator.obj 
+      ..\RobotCtrl\Robot.obj ..\RobotCtrl\RobotServo.obj 
+      ..\RobotCtrl\GlobalDef.obj ..\RobotCtrl\RobotSimu.obj"/>
+    <RESFILES value="MotionSpace.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) Unit1.dfm TRangeDlg.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="tee.lib vclx.lib bcbsmp.lib rtl.lib vcl.lib"/>
+    <SPARELIBS value="vcl.lib rtl.lib bcbsmp.lib vclx.lib tee.lib"/>
+    <PACKAGES value="vcl.bpi rtl.bpi dbrtl.bpi adortl.bpi vcldb.bpi vclx.bpi bdertl.bpi 
+      vcldbx.bpi ibxpress.bpi dsnap.bpi cds.bpi bdecds.bpi qrpt.bpi teeui.bpi 
+      teedb.bpi tee.bpi dss.bpi teeqr.bpi visualclx.bpi visualdbclx.bpi 
+      dsnapcrba.bpi dsnapcon.bpi bcbsmp.bpi vclie.bpi xmlrtl.bpi inet.bpi 
+      inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
+      bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
+      indy.bpi bcb2kaxserver.bpi dclusr.bpi"/>
+    <PATHCPP value=".;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value="_DEBUG"/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT"/>
+    <MAINSOURCE value="MotionSpace.cpp"/>
+    <INCLUDEPATH value="..\RobotCtrl;RobotCtrl;&quot;..\..\..\05 智通项目\轧制力计算&quot;;D:\Borland\CBuilder6\Projects;I:\Borland\CBuilder6\Projects;&quot;F:\01 我的设计\06 公司研发项目\04 并联机器人\运动空间计算&quot;;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\RobotCtrl;RobotCtrl;&quot;..\..\..\05 智通项目\轧制力计算&quot;;D:\Borland\CBuilder6\Projects;I:\Borland\CBuilder6\Projects;&quot;F:\01 我的设计\06 公司研发项目\04 并联机器人\运动空间计算&quot;;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\RobotCtrl -IRobotCtrl -I&quot;..\..\..\05 智通项目\轧制力计算&quot; 
+      -ID:\Borland\CBuilder6\Projects -II:\Borland\CBuilder6\Projects 
+      -I&quot;F:\01 我的设计\06 公司研发项目\04 并联机器人\运动空间计算&quot; 
+      -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp -D_DEBUG -boa"/>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v -vi- -c 
+      -tW -tWM"/>
+    <PFLAGS value="-$Y+ -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zi"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="MotionSpace.res" FORMNAME="" UNITNAME="MotionSpace.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="MotionSpace.cpp" FORMNAME="" UNITNAME="MotionSpace" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Unit1.cpp" FORMNAME="Form1" UNITNAME="Unit1" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="RobotImage.cpp" FORMNAME="" UNITNAME="RobotImage" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="D3Types.cpp" FORMNAME="" UNITNAME="D3Types" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="gaussj.cpp" FORMNAME="" UNITNAME="gaussj" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="TRangeDlg.cpp" FORMNAME="RangeDlg" UNITNAME="TRangeDlg" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SimplexMethod.cpp" FORMNAME="" UNITNAME="SimplexMethod" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ParallelRobot.cpp" FORMNAME="" UNITNAME="ParallelRobot" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\CtrlSystem.cpp" FORMNAME="" UNITNAME="CtrlSystem.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\MotionSimulator.cpp" FORMNAME="" UNITNAME="MotionSimulator.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\Robot.cpp" FORMNAME="" UNITNAME="Robot.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\RobotServo.cpp" FORMNAME="" UNITNAME="RobotServo.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\GlobalDef.cpp" FORMNAME="" UNITNAME="GlobalDef" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\RobotSimu.cpp" FORMNAME="" UNITNAME="RobotSimu" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=2052
+CodePage=936
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

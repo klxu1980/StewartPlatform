@@ -1,0 +1,11 @@
+.\objects\junebugctrl2.o: RobotCtrl\JuneBugCtrl2.cpp
+.\objects\junebugctrl2.o: RobotCtrl\JuneBugCtrl.h
+.\objects\junebugctrl2.o: RobotCtrl\Robot.h
+.\objects\junebugctrl2.o: RobotCtrl\RobotIKP.h
+.\objects\junebugctrl2.o: RobotCtrl\RobotBasic.h
+.\objects\junebugctrl2.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\junebugctrl2.o: RobotCtrl\BasicCalc.h
+.\objects\junebugctrl2.o: RobotCtrl\RobotFKP.h
+.\objects\junebugctrl2.o: RobotCtrl\MotionSimu.h
+.\objects\junebugctrl2.o: RobotCtrl\CubicTrace.h
+.\objects\junebugctrl2.o: RobotCtrl\GlobalDef.h
