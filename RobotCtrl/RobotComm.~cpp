@@ -162,6 +162,7 @@ void CRobotCommPkg::BuildStableCtrlOrder(void)
    AddCRC(CtrlOrder, CtrlOrderSize());
 }
 //---------------------------------------------------------------------------
+/*
 void CRobotCommPkg::BuildJuneBugCtrlOrder(float Dx, float Dy, float Yaw, float XYHeight, float Speed)
 {
    CtrlOrder[0] = 0x55;
@@ -170,6 +171,20 @@ void CRobotCommPkg::BuildJuneBugCtrlOrder(float Dx, float Dy, float Yaw, float X
 
    Short2Buffer(Dx       * 1000.0, CtrlOrder + 3);
    Short2Buffer(Dy       * 1000.0, CtrlOrder + 5);
+   Short2Buffer(Yaw      * 1000.0, CtrlOrder + 7);
+   Short2Buffer(XYHeight * 1000.0, CtrlOrder + 9);
+   Short2Buffer(Speed    * 1000.0, CtrlOrder + 11);
+
+   AddCRC(CtrlOrder, CtrlOrder[1]);
+} */
+void CRobotCommPkg::BuildJuneBugCtrlOrder(float Dir, float Step, float Yaw, float XYHeight, float Speed)
+{
+   CtrlOrder[0] = 0x55;
+   CtrlOrder[1] = 10;
+   CtrlOrder[2] = JUNEBUG_CTRL;
+
+   Short2Buffer(Dir      * 10.0,   CtrlOrder + 3);
+   Short2Buffer(Step     * 1000.0, CtrlOrder + 5);
    Short2Buffer(Yaw      * 1000.0, CtrlOrder + 7);
    Short2Buffer(XYHeight * 1000.0, CtrlOrder + 9);
    Short2Buffer(Speed    * 1000.0, CtrlOrder + 11);
@@ -215,6 +230,15 @@ void CRobotCommPkg::GetAccCtrlOrder(float &AccX, float &AccY, float &AccZ, float
    SpdRoll  = Buffer2Short(CtrlOrder + 13) * 0.1;
 }
 //---------------------------------------------------------------------------
+void CRobotCommPkg::GetJuneBugOrder(float &Dir, float &Step, float &Yaw, float &XYHeight, float &Speed)
+{
+   Dir      = Buffer2Short(CtrlOrder + 3)  * 0.001;
+   Step     = Buffer2Short(CtrlOrder + 5)  * 0.001;
+   Yaw      = Buffer2Short(CtrlOrder + 7)  * 0.001;
+   XYHeight = Buffer2Short(CtrlOrder + 9)  * 0.001;
+   Speed    = Buffer2Short(CtrlOrder + 11) * 0.001;
+}
+/*
 void CRobotCommPkg::GetJuneBugOrder(float &Dx, float &Dy, float &Yaw, float &XYHeight, float &Speed)
 {
    Dx       = Buffer2Short(CtrlOrder + 3)  * 0.001;
@@ -223,6 +247,7 @@ void CRobotCommPkg::GetJuneBugOrder(float &Dx, float &Dy, float &Yaw, float &XYH
    XYHeight = Buffer2Short(CtrlOrder + 9)  * 0.001;
    Speed    = Buffer2Short(CtrlOrder + 11) * 0.001;
 }
+*/
 //---------------------------------------------------------------------------
 void CRobotCommPkg::FdkRobotStatus(CCtrlSystem *CtrlSystem)
 {

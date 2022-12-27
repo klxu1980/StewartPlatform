@@ -568,12 +568,24 @@ void TForm1::SendJuneBugCtrlOrder(void)
 {
    float Dx  = CSpinEdit8->Value * 0.01;
    float Dy  = CSpinEdit9->Value * 0.01;
+
+   float Step = 0.0;
+   float Dir  = 0.0;
+   float XYLen = sqrt(Dx * Dx + Dy * Dy);
+   if(XYLen >= 0.1)
+   {
+      Dir  = acos(Dx / XYLen) * 180.0 / M_PI;
+      if(Dy < 0.0)
+         Dir += 180.0;
+      Step = Max(fabs(Dx), fabs(Dy));
+   }
+
    float Yaw = CSpinEdit10->Value;
    float Spd = CSpinEdit11->Value * 0.01;
    float XYHeight = CSpinEdit12->Value * 0.001;
 
-   RefreshJoyStickIndicate(Dx, Dy);
-   __RobotCommPkg.BuildJuneBugCtrlOrder(Dx, Dy, Yaw, XYHeight, Spd);
+   RefreshJoyStickIndicate(Dir, Step);
+   __RobotCommPkg.BuildJuneBugCtrlOrder(Dir, Step, Yaw, XYHeight, Spd);
    SendOrder(__RobotCommPkg);
 }
 //---------------------------------------------------------------------------
@@ -610,7 +622,7 @@ void __fastcall TForm1::CheckBox9Click(TObject *Sender)
    TimerJoyStick->Enabled = CheckBox9->Checked;
 }
 //---------------------------------------------------------------------------
-void TForm1::RefreshJoyStickIndicate(float Dx, float Dy)
+void TForm1::RefreshJoyStickIndicate(float Dir, float Step)
 {
    __BmpJoyStick->Canvas->Brush->Color = clBlack;
    __BmpJoyStick->Canvas->Pen->Color   = clLime;
@@ -619,15 +631,13 @@ void TForm1::RefreshJoyStickIndicate(float Dx, float Dy)
    __BmpJoyStick->Canvas->FillRect(TRect(0, 0, __BmpJoyStick->Width, __BmpJoyStick->Height));
    __BmpJoyStick->Canvas->MoveTo(__BmpJoyStick->Width / 2, __BmpJoyStick->Height / 2);
 
-   float Step  = max(fabs(Dx), fabs(Dy));
-   float XYLen = sqrt(Dx * Dx + Dy * Dy);
+   float Dx = cos(Dir * M_PI / 180.0) * Step;
+   float Dy = -sin(Dir * M_PI / 180.0) * Step;
 
-   if(XYLen > 0.1)
-   {
-      int X = Dx * Step * __BmpJoyStick->Width / (2 * XYLen);
-      int Y = Dy * Step * __BmpJoyStick->Width / (2 * XYLen);
-      __BmpJoyStick->Canvas->LineTo(__BmpJoyStick->Width / 2 + X, __BmpJoyStick->Height / 2 + Y);
-   }
+   int X = Dx * __BmpJoyStick->Width * 0.5;
+   int Y = Dy * __BmpJoyStick->Width * 0.5;
+   __BmpJoyStick->Canvas->LineTo(__BmpJoyStick->Width / 2 + X, __BmpJoyStick->Height / 2 + Y);
+
    PaintBox2->Canvas->Draw(0, 0, __BmpJoyStick);
 }
 //---------------------------------------------------------------------------

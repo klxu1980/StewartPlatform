@@ -295,7 +295,7 @@ private:
         void  SendJuneBugCtrlOrder(void);
 private:
         void  InitJoyStick(void);
-        void  RefreshJoyStickIndicate(float Dx, float Dy);
+        void  RefreshJoyStickIndicate(float Dir, float Step);
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
 };

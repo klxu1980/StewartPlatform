@@ -141,10 +141,10 @@ void CCtrlSystem::ExtractCtrlOrder(void)
   }
   else if(__CtrlMode == JUNEBUG_CTRL)
   {
-     float Dx, Dy, Yaw, XYHeight, Speed;
-     __CommPkg.GetJuneBugOrder(Dx, Dy, Yaw, XYHeight, Speed);
-     __JuneBugCtrl.Dx       = Dx;
-     __JuneBugCtrl.Dy       = Dy;
+     float Dir, Step, Yaw, XYHeight, Speed;
+     __CommPkg.GetJuneBugOrder(Dir, Step, Yaw, XYHeight, Speed);
+     __JuneBugCtrl.Dir      = Dir;
+     __JuneBugCtrl.Step     = Step;
      __JuneBugCtrl.Yaw      = Yaw;
      __JuneBugCtrl.XYHeight = XYHeight;
      __JuneBugCtrl.Speed    = Speed;

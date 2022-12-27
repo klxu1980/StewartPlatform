@@ -17,6 +17,7 @@ CJuneBugCtrl::CJuneBugCtrl(void)
  : XYHeight(0.01)
 {
    // 设置机器人几何参数
+   // 几何参数的相关常数定义在GlobalDef.h文件中
    __Robot.UpperArmLength   = ROBOT_UPPER_ARM_LENGTH;
    __Robot.UpperBaseLength  = ROBOT_UPPER_BASE_LENGTH;
    __Robot.LowerArmLength   = ROBOT_LOWER_ARM_LENGTH;
@@ -30,20 +31,24 @@ CJuneBugCtrl::CJuneBugCtrl(void)
 
    __Robot.InitStructureParams();
 
+   // 最大速度约束(x, y, z, yaw, pitch, roll)
    MaxSpd[0] = 0.1;
    MaxSpd[1] = 0.1;
    MaxSpd[2] = 0.1;
    MaxSpd[3] = 20;
    MaxSpd[4] = 20;
    MaxSpd[5] = 20;
+
+   // 伺服电缸的最大速度约束设置为其最大速度(m/s)
    MaxJackSpd = SERVO_RPM_MAX * SERVO_ROUND_MM * 0.001 / 60.0;
 
+   // 最大加速度约束
    MaxAcc[0] = 0.5;
    MaxAcc[1] = 0.5;
    MaxAcc[2] = 0.5;
-   MaxAcc[3] = 2;
-   MaxAcc[4] = 2;
-   MaxAcc[5] = 2;
+   MaxAcc[3] = 5;
+   MaxAcc[4] = 5;
+   MaxAcc[5] = 5;
 
    Initialize();
 }
@@ -60,6 +65,7 @@ void CJuneBugCtrl::Initialize(void)
 //---------------------------------------------------------------------------
 void CJuneBugCtrl::Move(void)
 {
+   // 根据机器人当前的运动状态，调用相应的轨迹规划函数，规划运动轨迹
    switch(__BugState)
    {
    case bsIdle:
@@ -83,27 +89,21 @@ void CJuneBugCtrl::Move(void)
    }
 
    // 按照轨迹运动
-   MoveByTrace();
+   __Trace.Position(__MoveTime, PosEuler);
+   __MoveTime += CTRL_INTERVAL;
 }
 //---------------------------------------------------------------------------
 // MoveRequired()
+// 检测机器人是否需要运动。当运动步长大于0.1，或者运动角度大于2°时，
+// 且运动速度大于0.1时，则机器人开始运动。
 //---------------------------------------------------------------------------
 bool CJuneBugCtrl::MoveRequired(void)
 {
-   return (Length(Dx, Dy) > 0.1 || fabs(Yaw) > 2.0) && Speed > 0.1;
-}
-//---------------------------------------------------------------------------
-// CalcCubicParams()
-//---------------------------------------------------------------------------
-void CJuneBugCtrl::CalcCubicParams(float T, float x0, float v0, float x1, float v1, float a[4])
-{
-   a[0] = x0;
-   a[1] = v0;
-   a[2] = (3 * (x1 - x0) - (2 * v0 + v1) * T) / (T * T);
-   a[3] = (2 * (x0 - x1) + (v0 + v1) * T) / (T * T * T);
+   return (Step > 0.1 || fabs(Yaw) > 2.0) && Speed > 0.1;
 }
 //---------------------------------------------------------------------------
 // MoveByTrace()
+// 按照规划好的轨迹运动
 //---------------------------------------------------------------------------
 void CJuneBugCtrl::MoveByTrace(void)
 {
@@ -217,20 +217,12 @@ void CJuneBugCtrl::ScheduleIdleMovement(void)
 // ScheduleXYMovement()
 // 规划机器人在XY平面上的运动轨迹
 //---------------------------------------------------------------------------
-void CJuneBugCtrl::ScheduleXYMovement(float XYHeight, float Dx, float Dy, float Yaw)
+void CJuneBugCtrl::ScheduleXYMovement(float XYHeight, float Dir, float Step, float Yaw)
 {
-   // Dx, Dy为[-1, 1]之间的独立变量，将其转换为(Dx, Dy, Step)，
-   // 使(Dx, Dy)表示方向(Length(Dx, Dy) == 0)，Step \in [0, 1]表示相对步长
-   float Step;
-   float XYLen = Length(Dx, Dy);
-   if(XYLen < 0.1)
-      Step = Dx = Dy = 0;
-   else
-   {
-      Dx  /= XYLen;
-      Dy  /= XYLen;
-      Step = Max(fabs(Dx), fabs(Dy));
-   }
+   float Dx = cos(Dir * M_PI / 180.0) * Step;
+   float Dy = sin(Dir * M_PI / 180.0) * Step;
+   if(Step < 0.1)
+      Dx = Dy = 0.0;
    
    if(XYHeight >= 0)
    {
@@ -361,12 +353,12 @@ void CJuneBugCtrl::StateMoveUpDown(void)
       if(__BugState == bsMoveUp)
       {
          __BugState = bsMoveXYUpper;
-         ScheduleXYMovement(XYHeight, Dx, Dy, Yaw);
+         ScheduleXYMovement(XYHeight, Dir, Step, Yaw);
       }
       else
       {
          __BugState = bsMoveXYLower;
-         ScheduleXYMovement(-XYHeight, Dx, Dy, Yaw);
+         ScheduleXYMovement(-XYHeight, Dir, Step, Yaw);
       }
    }
 }
@@ -409,14 +401,18 @@ void CJuneBugCtrl::StateMoveXY(void)
    else if(__MoveTime >= __MaxMoveTime)
    {
       // 运动方向有可能发生改变，因此需要判断是上三足还是下三足运动最有利
-      float Step1 = SearchForTheLargestXYStep(XYHeight, Dx, Dy, Yaw);
-      float Step2 = SearchForTheLargestXYStep(-XYHeight, -Dx, -Dy, -Yaw);
+      //float Step1 = SearchForTheLargestXYStep(XYHeight, Dx, Dy, Yaw);
+      //float Step2 = SearchForTheLargestXYStep(-XYHeight, -Dx, -Dy, -Yaw);
+      float Step1 = SearchForTheLargestXYStep(XYHeight, Dir, Step, Yaw);
+      float Step2 = SearchForTheLargestXYStep(-XYHeight, -Dir, Step, -Yaw);
 
       float CurX   = __Trace.Trace[0].Position(__MoveTime);
       float CurY   = __Trace.Trace[1].Position(__MoveTime);
       float CurYaw = __Trace.Trace[3].Position(__MoveTime);
 
       CBugState NxtState;
+      float Dx = cos(Dir * M_PI / 180.0);
+      float Dy = sin(Dir * M_PI / 180.0);
       if(Length(CurX - Step1 * Dx, CurY - Step1 * Dy, (CurYaw - Yaw) * 0.1) >
          Length(CurX + Step2 * Dx, CurY + Step2 * Dy, (CurYaw + Yaw) * 0.1) )
       {
@@ -469,12 +465,12 @@ void CJuneBugCtrl::StateMoveXYIdle(void)
          if(__BugState == bsMoveXYIdleUpper)
          {
             __BugState = bsMoveXYUpper;
-            ScheduleXYMovement(XYHeight, Dx, Dy, Yaw);
+            ScheduleXYMovement(XYHeight, Dir, Step, Yaw);
          }
          else
          {
             __BugState = bsMoveXYLower;
-            ScheduleXYMovement(-XYHeight, Dx, Dy, Yaw);
+            ScheduleXYMovement(-XYHeight, Dir, Step, Yaw);
          }
       }
       else

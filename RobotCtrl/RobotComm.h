@@ -90,7 +90,8 @@ public:
    void  BuildAccCtrlOrder(float AccX, float AccY, float AccZ, float SpdYaw, float SpdPitch, float SpdRoll);
    void  BuildAccCtrlParams(CMotionSimuParams Params);
    void  BuildStableCtrlOrder(void);
-   void  BuildJuneBugCtrlOrder(float Dx, float Dy, float Yaw, float XYHeight, float Speed);
+   //void  BuildJuneBugCtrlOrder(float Dx, float Dy, float Yaw, float XYHeight, float Speed);
+   void  BuildJuneBugCtrlOrder(float Dir, float Step, float Yaw, float XYHeight, float Speed);
 public:
    // 以下部分是机器人接受解析上位机指令
    int   GetOrderType(void){return CtrlOrder[2];}
@@ -98,7 +99,8 @@ public:
    void  GetPosCtrlOrder(float &X, float &Y, float &Z, float &Yaw, float &Pitch, float &Roll);
    void  GetAccCtrlOrder(float &AccX, float &AccY, float &AccZ, float &SpdYaw, float &SpdPitch, float &SpdRoll);
    void  GetAccCtrlParams(CMotionSimuParams &Params);
-   void  GetJuneBugOrder(float &Dx, float &Dy, float &Yaw, float &XYHeight, float &Speed);
+   //void  GetJuneBugOrder(float &Dx, float &Dy, float &Yaw, float &XYHeight, float &Speed);
+   void  GetJuneBugOrder(float &Dir, float &Step, float &Yaw, float &XYHeight, float &Speed);
 public:
    void  FdkRobotStatus(CCtrlSystem *CtrlSystem);
    void  GetLmtSwitchStatus(char &SwitchLower, char &SwitchUpper, char &JackMin, char &JackMax);
