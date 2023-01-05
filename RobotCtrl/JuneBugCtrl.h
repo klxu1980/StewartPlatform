@@ -55,7 +55,7 @@ private:
    float Length(float a, float b){return sqrt(a * a + b * b);}
    float Length(float a, float b, float c){return sqrt(a * a + b * b + c * c);}
    float Max(float a, float b){return (a > b)? a : b;}
-   float SearchForTheLargestXYStep(float Z, float Dx, float Dy, float Yaw);
+   float SearchForTheLargestXYStep(float Z, float Dir, float Step, float Yaw);
    void  ScheduleMovement(float Start[6], float VStart[6], float End[6], float VEnd[6]);
    void  ScheduleMovement(float End[6], float VEnd[6]);
    void  ScheduleIdleMovement(void);

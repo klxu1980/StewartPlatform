@@ -1,7 +1,8 @@
 //---------------------------------------------------------------------------
 // 2021.12.30：修正了由于速度改变而产生的控制错误
-// 2022.03.05：测试发现了两个主要问题：
-//             1. 
+// 2023.01.06：直线运动方向由(Dx,Dy,Step)的表示方式，修改为(Dir, Step)方式
+//             直线运动控制没有问题。
+//             加入旋转运动后，路径规划存在错误，导致电缸会超出其行程范围
 
 #pragma hdrstop
 
@@ -221,13 +222,11 @@ void CJuneBugCtrl::ScheduleXYMovement(float XYHeight, float Dir, float Step, flo
 {
    float Dx = cos(Dir * M_PI / 180.0) * Step;
    float Dy = sin(Dir * M_PI / 180.0) * Step;
-   if(Step < 0.1)
-      Dx = Dy = 0.0;
    
    if(XYHeight >= 0)
    {
       // 实际运动长度(m)等于(Dx, Dy, Yaw)方向上的最大直线运动量，乘以相对步长
-      float Dist = SearchForTheLargestXYStep(XYHeight, Dx, Dy, Yaw) * Step;
+      float Dist = SearchForTheLargestXYStep(XYHeight, Dir, Step, Yaw) * Step;
 
       // 轨迹末端位姿和速度(速度均为0)
       float End[6]  = {Dist * Dx, Dist * Dy, XYHeight, Yaw, 0, 0};
@@ -238,7 +237,7 @@ void CJuneBugCtrl::ScheduleXYMovement(float XYHeight, float Dir, float Step, flo
    }
    else
    {
-      float Dist    = SearchForTheLargestXYStep(-XYHeight, -Dx, -Dy, -Yaw) * Step;
+      float Dist    = SearchForTheLargestXYStep(-XYHeight, Dir + 180.0, Step, -Yaw) * Step;
       float End[6]  = {-Dist * Dx, -Dist * Dy, XYHeight, -Yaw, 0, 0};
       float VEnd[6] = {0, 0, 0, 0, 0, 0};
 
@@ -249,10 +248,10 @@ void CJuneBugCtrl::ScheduleXYMovement(float XYHeight, float Dir, float Step, flo
 // SearchForTheLargestStep()
 // 采用二分法搜索给定方向上的最大步长
 //---------------------------------------------------------------------------
-float CJuneBugCtrl::SearchForTheLargestXYStep(float Z, float Dx, float Dy, float Yaw)
+float CJuneBugCtrl::SearchForTheLargestXYStep(float Z, float Dir, float Step, float Yaw)
 {
-   if(Dx == 0 && Dy == 0)
-      return 0;
+   float Dx = cos(Dir * M_PI / 180.0) * Step;
+   float Dy = sin(Dir * M_PI / 180.0) * Step;
 
    float L1 = 0;
    float L2 = 1;     // 单位：m
@@ -404,7 +403,7 @@ void CJuneBugCtrl::StateMoveXY(void)
       //float Step1 = SearchForTheLargestXYStep(XYHeight, Dx, Dy, Yaw);
       //float Step2 = SearchForTheLargestXYStep(-XYHeight, -Dx, -Dy, -Yaw);
       float Step1 = SearchForTheLargestXYStep(XYHeight, Dir, Step, Yaw);
-      float Step2 = SearchForTheLargestXYStep(-XYHeight, -Dir, Step, -Yaw);
+      float Step2 = SearchForTheLargestXYStep(-XYHeight, Dir + 180.0, Step, -Yaw);
 
       float CurX   = __Trace.Trace[0].Position(__MoveTime);
       float CurY   = __Trace.Trace[1].Position(__MoveTime);
@@ -446,9 +445,9 @@ void CJuneBugCtrl::StateMoveXY(void)
       {
          __BugState = NxtState;
          if(NxtState == bsMoveXYLower)
-            ScheduleXYMovement(-XYHeight, Dx, Dy, Yaw);
+            ScheduleXYMovement(-XYHeight, Dir, Step, Yaw);
          else
-            ScheduleXYMovement(XYHeight, Dx, Dy, Yaw);
+            ScheduleXYMovement(XYHeight, Dir, Step, Yaw);
       }
    }
 }
