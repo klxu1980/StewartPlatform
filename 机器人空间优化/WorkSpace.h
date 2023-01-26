@@ -12,6 +12,8 @@ using namespace std;
 #define SYM_BY_Y     2
 #define SYM_BY_Z     3
 //---------------------------------------------------------------------------
+// 定义三维点及其偏序关系，从而进一步定义三维点集合
+//---------------------------------------------------------------------------
 class CXYZ
 {
 public:
@@ -33,6 +35,8 @@ public:
 
 typedef set<CXYZ, XYZLess> CXYZSet;
 //---------------------------------------------------------------------------
+// 定义二维点及其偏序关系，从而进一步定义二维点集合
+//---------------------------------------------------------------------------
 class CXY
 {
 public:
@@ -53,18 +57,20 @@ public:
 
 typedef set<CXY, XYLess> CXYSet;
 //---------------------------------------------------------------------------
+// CWorkSpace用于搜索机器人的运动空间
+// 空间搜索沿着Z轴执行。对每个Z轴坐标，以Step为步长，对XY平面离散化，检查每个离散点
+// 是否可达。之后，绘制出运动空间边界
+//---------------------------------------------------------------------------
 class CWorkSpace
 {
 friend class CCubeSpace;
 private:
-   // 记录标记运动空间中，每个离散点的可达性
-   char     *__XYVisited;
-   const int __XMax;
+   bool     *__XYVisited;    // 二维数组，用于在搜索运动空间边界时，记录已被访问的点
+   const int __XMax;         // __XYVisited的维度为(__XMax * 2 + 1) * (__YMax * 2 + 1)
    const int __YMax;
 public:
-   // 搜索步长，即每个像素点代表的长度(mm)
-   float     Step;
-   int       SymAxis;    // 对称轴
+   float     Step;           // 搜索步长，即每个像素点代表的长度(mm)。
+   int       SymAxis;        // 对称轴
 public:
    // 定义XY平面上的边界线
    // 注意：边界线上点的坐标均为真实坐标，单位mm
@@ -80,7 +86,7 @@ public:
    };
    vector<CBorderXY> BorderXYZ;   // BorderXYZ是经过排序后的边界点
 private:
-   char& XYVisited(int X, int Y){return __XYVisited[(__YMax - Y) * (__XMax * 2 + 1) + __XMax + X];}
+   bool& XYVisited(int X, int Y){return __XYVisited[(__YMax - Y) * (__XMax * 2 + 1) + __XMax + X];}
    void  InitVisitMark(void){memset(__XYVisited, 0, (__XMax * 2 + 1) * (__YMax * 2 + 1));}
 protected:
    virtual bool IsFeasible(int X, int Y, int Z) = 0;    // 检查某个点是否处在可达空间中，注意：X, Y, Z为由步长离散化后的坐标

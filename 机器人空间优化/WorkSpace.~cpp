@@ -17,7 +17,7 @@ CWorkSpace::CWorkSpace(void)
  : __XMax(1500),
    __YMax(1500)
 {
-   __XYVisited = new char[(__XMax * 2 + 1) * (__YMax * 2 + 1)];
+   __XYVisited = new bool[(__XMax * 2 + 1) * (__YMax * 2 + 1)];
 }
 //---------------------------------------------------------------------------
 // GetWorkSpaceBorderXY()
@@ -134,7 +134,6 @@ void CWorkSpace::DrawSpaceBorderXY(Graphics::TBitmap *SpaceImg, int Z)
    int CY = SpaceImg->Height / 2;
    for(unsigned int i = 0; i < BorderXYZ.size(); ++i)
    {
-      int xx = BorderXYZ[i].Z;
       if(BorderXYZ[i].Z == Z)
       {
          vector<CXY> &Border = BorderXYZ[i].Border;

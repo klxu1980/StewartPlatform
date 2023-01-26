@@ -634,8 +634,8 @@ void TForm1::RefreshJoyStickIndicate(float Dir, float Step)
    float Dx = cos(Dir * M_PI / 180.0) * Step;
    float Dy = -sin(Dir * M_PI / 180.0) * Step;
 
-   int X = Dx * Step * __BmpJoyStick->Width / (2 * XYLen);
-   int Y = Dy * Step * __BmpJoyStick->Width / (2 * XYLen);
+   int X = Dx * __BmpJoyStick->Width * 0.5;
+   int Y = Dy * __BmpJoyStick->Width * 0.5;
    __BmpJoyStick->Canvas->LineTo(__BmpJoyStick->Width / 2 + X, __BmpJoyStick->Height / 2 + Y);
 
    PaintBox2->Canvas->Draw(0, 0, __BmpJoyStick);

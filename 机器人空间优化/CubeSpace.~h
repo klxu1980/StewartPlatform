@@ -26,7 +26,7 @@ private:
    bool  CubeFeasible(double OX, double OY, double OZ, double L);
    bool  CubeFeasibleByEnum(double OX, double OY, double OZ, double L);
    bool  CubeFeasibleByBorder(double OX, double OY, double OZ, double L);
-   DP    CostFunction(const double *YZ);
+   double CostFunction(const double *YZ);
 public:
    CCubeSpace(void) : CheckFeasibleByEnum(true) {}
 public:

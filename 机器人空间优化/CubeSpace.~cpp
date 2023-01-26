@@ -12,9 +12,9 @@
 bool CCubeSpace::CubeFeasible(double OX, double OY, double OZ, double L)
 {
    // 目前看，枚举方法的计算效率反而更高一些
-   return CheckFeasibleByEnum? CubeFeasibleByEnum(OX, OY, OZ, L) : CubeFeasibleByBorder(OX, OY, OZ, L);
+   //return CheckFeasibleByEnum? CubeFeasibleByEnum(OX, OY, OZ, L) : CubeFeasibleByBorder(OX, OY, OZ, L);
 
-   //return CubeFeasibleByBorder(OX, OY, OZ, L);
+   return CubeFeasibleByBorder(OX, OY, OZ, L);
 }
 //---------------------------------------------------------------------------
 // CubeFeasibleByEnum()
@@ -121,7 +121,7 @@ float CCubeSpace::MaximizeL(double X, double Y, double Z)
 }
 //---------------------------------------------------------------------------
 #ifdef MAX_L_INDEPENDENTLY
-DP CCubeSpace::CostFunction(const double *Solution)
+double CCubeSpace::CostFunction(const double *Solution)
 {
    double X, Y, Z;
    if(WorkSpace->SymAxis == SYM_BY_X)

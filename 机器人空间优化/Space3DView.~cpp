@@ -21,7 +21,9 @@ CSpace3DView::CSpace3DView(void)
    __ScreenLeft(0),
    __ScreenTop(0),
    __ScreenWidth(1024),
-   __ScreenHeight(768)
+   __ScreenHeight(768),
+   __ShowHalfX(SHOW_WHOLE_DIR),
+   __ShowHalfY(SHOW_WHOLE_DIR)
 {
 }
 //---------------------------------------------------------------------------

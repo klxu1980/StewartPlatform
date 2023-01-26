@@ -158,6 +158,13 @@ __published:	// IDE-managed Components
         TCheckBox *CheckBox8;
         TCheckBox *CheckBox9;
         TCheckBox *CheckBox10;
+        TTabSheet *TabSheet5;
+        TGroupBox *GroupBox6;
+        TLabel *Label26;
+        TCSpinEdit *CSpinEdit13;
+        TButton *Button11;
+        TLabel *Label27;
+        TCSpinEdit *CSpinEdit14;
         void __fastcall CSpinEdit1Change(TObject *Sender);
         void __fastcall CSpinEdit13Change(TObject *Sender);
         void __fastcall Chart1AfterDraw(TObject *Sender);
@@ -194,9 +201,11 @@ __published:	// IDE-managed Components
         void __fastcall CheckBox2Click(TObject *Sender);
         void __fastcall CheckBox7Click(TObject *Sender);
         void __fastcall CheckBox9Click(TObject *Sender);
+        void __fastcall Button11Click(TObject *Sender);
 private:	// User declarations        
         bool               __IniLoading;
         CStuartWorkSpace   __RobotSpace;
+        CJuneBugWorkSpace  __JuneBugSpace;
         CSpaceFile         __SpaceFile;
         CWorkSpace        *__WorkSpace;
         CSpace3DView       __Space3DView;

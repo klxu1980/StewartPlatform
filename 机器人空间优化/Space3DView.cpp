@@ -273,7 +273,6 @@ void CSpace3DView::DrawWorkSpace(CWorkSpace *Space)
       glColor3ub(R, G >> 8, B >> 16);
 
       glBegin(GL_LINES);
-
          for(unsigned int m = 1; m < XY.size(); ++m)
          {
             if(__ShowHalfY * XY[m].Y >= 0 && __ShowHalfX * XY[m].X >= 0)
@@ -282,8 +281,6 @@ void CSpace3DView::DrawWorkSpace(CWorkSpace *Space)
                glVertex3d(XY[m].X * 0.01, XY[m].Y * 0.01, (Space->BorderXYZ[i].Z + __ZOffset)* 0.01);
             }
          }
-
-
       glEnd();
 
 

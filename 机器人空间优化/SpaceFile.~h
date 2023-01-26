@@ -16,7 +16,7 @@ private:
    CXYZSet __Reachable;
    CXYSet  __XYLayer;
 private:
-   bool IsFeasible(int X, int Y, int Z){return __Reachable.count(CXYZ(X / Step, Y / Step, Z / Step) );}
+   bool IsFeasible(int X, int Y, int Z){return __Reachable.count(CXYZ(X, Y, Z) );}
    void BeginEnumInitXY(int Z);
    bool FindNextInitXY(CXY &InitPoint);
    void GetXYLayer(CXYSet &Space, int Z);

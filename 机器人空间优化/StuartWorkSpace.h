@@ -18,6 +18,7 @@ private:
 public:
    CRobot Robot;
 public:
+   // 姿态角度约束。搜索运动空间范围时，需要在这里定义姿态角的最大范围
    float YawMin;
    float YawMax;
    float PitchMin;
@@ -37,6 +38,17 @@ public:
    void SetSearchStep(float Step);
 public:
    void SaveToFile(AnsiString FileName);
-   void LoadFromFile(AnsiString FileName);  
+   void LoadFromFile(AnsiString FileName);
+};
+//---------------------------------------------------------------------------
+class CJuneBugWorkSpace : public CStuartWorkSpace
+{
+public:
+   int XYHeight;
+   int YawRange;
+public:
+   CJuneBugWorkSpace(void);
+public:
+   void GetWorkSpaceBorder(void);
 };
 #endif

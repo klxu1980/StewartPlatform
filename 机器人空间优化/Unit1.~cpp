@@ -564,11 +564,52 @@ void __fastcall TForm1::CheckBox7Click(TObject *Sender)
 void __fastcall TForm1::CheckBox9Click(TObject *Sender)
 {
    if(CheckBox9->Checked && CheckBox10->Checked)
-      __Space3DView.ShowHalfX(SHOW_WHOLE_DIR);
+      __Space3DView.ShowHalfY(SHOW_WHOLE_DIR);
    else if(CheckBox9->Checked)
-      __Space3DView.ShowHalfX(SHOW_POS_DIR);
+      __Space3DView.ShowHalfY(SHOW_POS_DIR);
    else
-      __Space3DView.ShowHalfX(SHOW_NEG_DIR);
+      __Space3DView.ShowHalfY(SHOW_NEG_DIR);
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button11Click(TObject *Sender)
+{
+   // 机器人机械参数
+   __JuneBugSpace.Robot.UpperArmLength   = CSpinEdit1->Value * 0.001;
+   __JuneBugSpace.Robot.UpperBaseLength  = CSpinEdit2->Value * 0.001;
+   __JuneBugSpace.Robot.LowerArmLength   = CSpinEdit3->Value * 0.001;
+   __JuneBugSpace.Robot.LowerBaseLength  = CSpinEdit4->Value * 0.001;
+   __JuneBugSpace.Robot.UpperJointHeight = 0;
+   __JuneBugSpace.Robot.LowerJointHeight = 0;
+   __JuneBugSpace.Robot.JackFixedLength  = CSpinEdit5->Value * 0.001;
+   __JuneBugSpace.Robot.JackServoLength  = CSpinEdit6->Value * 0.001;
+   __JuneBugSpace.Robot.JackServoBuffer  = 0;
+
+   // 机器人姿态运动范围
+   __JuneBugSpace.Z = CSpinEdit14->Value;
+   __JuneBugSpace.YawRange = CSpinEdit13->Value;
+
+   // 计算机器人运动范围
+   __JuneBugSpace.SetSearchStep(1);
+
+   // 搜索运动空间
+   __JuneBugSpace.GetWorkSpaceBorder();
+   if(!__JuneBugSpace.BorderXYZ.empty())
+   {
+      __WorkSpace = &__JuneBugSpace;
+      __Space3DView.DrawSpace(&__JuneBugSpace, -__JuneBugSpace.BorderXYZ.front().Z);
+
+      CSpinEdit17->MinValue = __JuneBugSpace.BorderXYZ.front().Z;
+      CSpinEdit17->MaxValue = __JuneBugSpace.BorderXYZ.back().Z;
+      CSpinEdit17->Value    = __JuneBugSpace.BorderXYZ.front().Z;
+
+      CSpinEdit18->MinValue = CSpinEdit17->MinValue;
+      CSpinEdit18->MaxValue = CSpinEdit17->MaxValue;
+      CSpinEdit18->Value    = CSpinEdit17->MaxValue;
+
+      Application->MessageBox("机器人运动空间计算结束", "", MB_OK | MB_ICONINFORMATION);
+   }
+   else
+      Application->MessageBox("该约束条件下无可用空间", "", MB_OK | MB_ICONINFORMATION);        
 }
 //---------------------------------------------------------------------------
 

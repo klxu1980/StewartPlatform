@@ -12,6 +12,12 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 CStuartWorkSpace::CStuartWorkSpace(void)
+ : YawMin(0),
+   YawMax(0),
+   PitchMin(0),
+   PitchMax(0),
+   RollMin(0),
+   RollMax(0)
 {
    Step = 1;
    SymAxis = SYM_BY_Y;
@@ -77,6 +83,7 @@ void CStuartWorkSpace::GetWorkSpaceBorder(void)
 {
    Robot.InitStructureParams();
 
+   // 从0高度开始，搜索每个Z轴高度上的运动边界
    BorderXYZ.clear();
    for(int Z = 0; Z <= 5000; ++Z)
       GetWorkSpaceBorderXY(Z);
@@ -125,7 +132,34 @@ void CStuartWorkSpace::LoadFromFile(AnsiString FileName)
    Stream->Read(&RollMin,   sizeof(RollMin));
    Stream->Read(&RollMax,   sizeof(RollMax));
 
+   Robot.InitStructureParams();
+
    LoadBorder(Stream);
 
    delete Stream;
+}
+//---------------------------------------------------------------------------
+CJuneBugWorkSpace::CJuneBugWorkSpace(void)
+{
+}
+//---------------------------------------------------------------------------
+void CJuneBugWorkSpace::GetWorkSpaceBorder(void)
+{
+   Robot.InitStructureParams();
+
+   vector<CBorderXY> XYZ;
+   for(int Yaw = 0; Yaw <= YawRange; ++Yaw)
+   {
+      YawMin = -Yaw;
+      YawMax = Yaw;
+      
+      BorderXYZ.clear();
+      GetWorkSpaceBorderXY(Robot.RobotFKP.DefaultZ + XYHeight);
+
+      for(unsigned int i = 0; i < BorderXYZ.size(); ++i)
+         BorderXYZ[i].Z = Yaw;
+      XYZ.insert(XYZ.end(), BorderXYZ.begin(), BorderXYZ.end());
+   }
+
+   BorderXYZ = XYZ;
 }

@@ -81,9 +81,9 @@
 #endif
 
 #ifdef JUNE_BUG1       // 六足爬行机器人
-   #define ROBOT_UPPER_ARM_LENGTH     0.587          // 机器人上平台长臂长度
+   #define ROBOT_UPPER_ARM_LENGTH     0.448          // 机器人上平台长臂长度
    #define ROBOT_UPPER_BASE_LENGTH    0.050          // 机器人上平台短臂长度
-   #define ROBOT_LOWER_ARM_LENGTH     0.377          // 机器人下平台长臂长度
+   #define ROBOT_LOWER_ARM_LENGTH     0.448          // 机器人下平台长臂长度
    #define ROBOT_LOWER_BASE_LENGTH    0.050          // 机器人下平台短臂长度
 
    #define ACTIVE_SERVO_CNT           6
@@ -91,14 +91,15 @@
                                                      //   每秒脉冲总数不超过6553500，每秒最多50转，因此每转一周脉冲数不超过131,070。
 																										 //   设定为10,000，台达伺服B2编码器1转脉冲为160,000，将电子齿轮分子(P1-44)设为160，分母(P1-45)为10。
    #define SERVO_ROUND_MM             5.0            // 伺服转动一周电缸直线运动距离，单位 mm
-   #define SERVO_RPM_MIN              5              // 伺服最小转速，单位RPM
+   #define SERVO_RPM_MIN              20             // 伺服最小转速，单位RPM
    #define SERVO_RPM_MAX              3000           // 伺服最大转速，单位RPM
 
    #define JACK_FIXED_LENGTH          0.54           // 伺服电缸固定部分长度(该长度指的是由基座到限位开关的位置，需要准确测量)
    #define JACK_SERVO_LENGTH          0.25           // 伺服运动部分总行程(m)，通常指上下限位开关之间的长度
    #define JACK_SERVO_DEC             0.005          // 伺服两端减速区长度(m)
 
-   #define INIT_Z_POSITION            1.140
+   #define INIT_Z_POSITION            1.3
+	 #define DEFAULT_Z_OFFSET           0.0
 #endif
 
 // 运动模拟参数
@@ -134,8 +135,8 @@
 #endif
 
 // 控制器归零速度
-#define GO_ZERO_RPM          50     // 归零转速
-#define ZERO_2_CENTER_SPD    0.02    // 由零点向中心点移动速度(m/s)
+#define GO_ZERO_RPM          100     // 归零转速
+#define ZERO_2_CENTER_SPD    0.01    // 由零点向中心点移动速度(m/s)
 
 // 伺服最大转速变化(0RPM到SERVO_RPM_MAX)所需要的加速时间
 // 通过该时间计算最大允许加速度，从而避免伺服出现猛烈振动
@@ -150,7 +151,7 @@
 //#define  CALC_SIN_FAST
 
 // 是否在每个控制周期间隔进行正向运动学计算
-#define CALC_FDKP
+//#define CALC_FDKP
 
 // 通信速率
 #define UART3_BAUD_RATE 4800

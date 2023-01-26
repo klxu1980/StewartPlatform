@@ -22,11 +22,11 @@ public:
    bool  CheckFeasibleByEnum;           // 是否基于枚举检测工作空间
    float InitX, InitY, InitZ;           // 初始中心位置
 private:
-   float MaximizeL(double X, double Y, double Z);
-   bool  CubeFeasible(double OX, double OY, double OZ, double L);
-   bool  CubeFeasibleByEnum(double OX, double OY, double OZ, double L);
-   bool  CubeFeasibleByBorder(double OX, double OY, double OZ, double L);
-   DP    CostFunction(const double *YZ);
+   float  MaximizeL(double X, double Y, double Z);
+   bool   CubeFeasible(double OX, double OY, double OZ, double L);
+   bool   CubeFeasibleByEnum(double OX, double OY, double OZ, double L);
+   bool   CubeFeasibleByBorder(double OX, double OY, double OZ, double L);
+   double CostFunction(const double *YZ);
 public:
    CCubeSpace(void) : CheckFeasibleByEnum(true) {}
 public:

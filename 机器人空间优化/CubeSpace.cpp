@@ -121,7 +121,7 @@ float CCubeSpace::MaximizeL(double X, double Y, double Z)
 }
 //---------------------------------------------------------------------------
 #ifdef MAX_L_INDEPENDENTLY
-DP CCubeSpace::CostFunction(const double *Solution)
+double CCubeSpace::CostFunction(const double *Solution)
 {
    double X, Y, Z;
    if(WorkSpace->SymAxis == SYM_BY_X)

@@ -99,7 +99,7 @@
    #define JACK_SERVO_DEC             0.005          // 伺服两端减速区长度(m)
 
    #define INIT_Z_POSITION            1.3
-	 #define DEFAULT_Z_OFFSET           0.0
+   #define DEFAULT_Z_OFFSET           0.0
 #endif
 
 // 运动模拟参数

@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 132
-  Top = 148
-  Width = 1696
-  Height = 1066
+  Left = 251
+  Top = 0
+  Width = 1616
+  Height = 916
   Caption = #24182#32852#26426#22120#20154#36816#21160#31354#38388
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object Form1: TForm1
     Left = 207
     Top = 0
     Width = 185
-    Height = 1028
+    Height = 878
     Align = alLeft
     BorderWidth = 5
     TabOrder = 0
@@ -293,20 +293,20 @@ object Form1: TForm1
   object Panel2: TPanel
     Left = 392
     Top = 0
-    Width = 1288
-    Height = 1028
+    Width = 1208
+    Height = 878
     Align = alClient
     Caption = 'Panel2'
     TabOrder = 1
     object PageControl1: TPageControl
       Left = 1
       Top = 27
-      Width = 1286
-      Height = 1000
-      ActivePage = TabSheet1
+      Width = 1206
+      Height = 850
+      ActivePage = TabSheet2
       Align = alClient
       MultiLine = True
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       TabPosition = tpLeft
       object TabSheet1: TTabSheet
@@ -314,8 +314,8 @@ object Form1: TForm1
         object PaintBox1: TPaintBox
           Left = 0
           Top = 53
-          Width = 1261
-          Height = 939
+          Width = 1181
+          Height = 789
           Align = alClient
           OnMouseDown = PaintBox1MouseDown
           OnMouseMove = PaintBox1MouseMove
@@ -325,7 +325,7 @@ object Form1: TForm1
         object CoolBar2: TCoolBar
           Left = 0
           Top = 0
-          Width = 1261
+          Width = 1181
           Height = 53
           AutoSize = True
           Bands = <
@@ -333,17 +333,17 @@ object Form1: TForm1
               Control = ToolBar2
               ImageIndex = -1
               MinHeight = 22
-              Width = 1257
+              Width = 1177
             end
             item
               Control = ToolBar4
               ImageIndex = -1
-              Width = 1257
+              Width = 1177
             end>
           object ToolBar2: TToolBar
             Left = 9
             Top = 0
-            Width = 1244
+            Width = 1164
             Height = 22
             AutoSize = True
             ButtonWidth = 43
@@ -496,7 +496,7 @@ object Form1: TForm1
           object ToolBar4: TToolBar
             Left = 9
             Top = 24
-            Width = 1244
+            Width = 1164
             Height = 25
             Caption = 'ToolBar4'
             TabOrder = 1
@@ -553,8 +553,8 @@ object Form1: TForm1
         object Chart1: TChart
           Left = 0
           Top = 29
-          Width = 1173
-          Height = 775
+          Width = 1181
+          Height = 813
           BackWall.Brush.Color = clWhite
           BackWall.Brush.Style = bsClear
           Title.Text.Strings = (
@@ -584,19 +584,19 @@ object Form1: TForm1
         object CoolBar3: TCoolBar
           Left = 0
           Top = 0
-          Width = 1173
+          Width = 1181
           Height = 29
           AutoSize = True
           Bands = <
             item
               Control = ToolBar3
               ImageIndex = -1
-              Width = 1169
+              Width = 1177
             end>
           object ToolBar3: TToolBar
             Left = 9
             Top = 0
-            Width = 1156
+            Width = 1164
             Height = 25
             ButtonWidth = 123
             Caption = 'ToolBar1'
@@ -656,6 +656,7 @@ object Form1: TForm1
               Top = 0
               Caption = #21478#23384#36816#21160#31354#38388#22270#29255
               ImageIndex = 0
+              OnClick = ToolButton7Click
             end
           end
         end
@@ -664,7 +665,7 @@ object Form1: TForm1
     object CoolBar1: TCoolBar
       Left = 1
       Top = 1
-      Width = 1286
+      Width = 1206
       Height = 26
       AutoSize = True
       Bands = <
@@ -672,12 +673,12 @@ object Form1: TForm1
           Control = ToolBar1
           ImageIndex = -1
           MinHeight = 22
-          Width = 1282
+          Width = 1202
         end>
       object ToolBar1: TToolBar
         Left = 9
         Top = 0
-        Width = 1269
+        Width = 1189
         Height = 22
         AutoSize = True
         ButtonWidth = 75
@@ -779,10 +780,10 @@ object Form1: TForm1
     Left = 0
     Top = 0
     Width = 207
-    Height = 1028
-    ActivePage = TabSheet3
+    Height = 878
+    ActivePage = TabSheet5
     Align = alLeft
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 2
     object TabSheet3: TTabSheet
       Caption = #24182#32852#26426#22120#20154
@@ -1133,6 +1134,64 @@ object Form1: TForm1
           TabOrder = 2
           OnClick = Button7Click
         end
+      end
+    end
+    object TabSheet5: TTabSheet
+      Caption = #20845#36275#26426#22120#20154
+      ImageIndex = 2
+      object GroupBox6: TGroupBox
+        Left = 0
+        Top = 0
+        Width = 199
+        Height = 153
+        Align = alTop
+        Caption = #23039#24577#35282#33539#22260
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -14
+        Font.Name = #23435#20307
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        object Label26: TLabel
+          Left = 16
+          Top = 32
+          Width = 98
+          Height = 14
+          Caption = #26368#22823#20559#33322#35282'('#176')'
+        end
+        object Label27: TLabel
+          Left = 16
+          Top = 88
+          Width = 112
+          Height = 14
+          Caption = 'XY'#24179#38754#20559#31227#37327'(mm)'
+        end
+        object CSpinEdit13: TCSpinEdit
+          Left = 16
+          Top = 48
+          Width = 169
+          Height = 23
+          TabOrder = 0
+          OnChange = CSpinEdit1Change
+        end
+        object CSpinEdit14: TCSpinEdit
+          Left = 16
+          Top = 104
+          Width = 169
+          Height = 23
+          TabOrder = 1
+          OnChange = CSpinEdit1Change
+        end
+      end
+      object Button11: TButton
+        Left = 8
+        Top = 168
+        Width = 75
+        Height = 25
+        Caption = 'Button11'
+        TabOrder = 1
+        OnClick = Button11Click
       end
     end
   end
