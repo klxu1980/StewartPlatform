@@ -228,6 +228,8 @@ __published:	// IDE-managed Components
         TToolButton *ToolButton11;
         TToolButton *ToolButton12;
         TEdit *Edit1;
+        TToolButton *ToolButton15;
+        TToolButton *ToolButton16;
         void __fastcall PaintBox1MouseDown(TObject *Sender,
           TMouseButton Button, TShiftState Shift, int X, int Y);
         void __fastcall PaintBox1MouseUp(TObject *Sender,
@@ -258,6 +260,8 @@ __published:	// IDE-managed Components
         void __fastcall Button2Click(TObject *Sender);
         void __fastcall ToolButton12Click(TObject *Sender);
         void __fastcall ToolButton11Click(TObject *Sender);
+        void __fastcall ToolButton15Click(TObject *Sender);
+        void __fastcall ToolButton16Click(TObject *Sender);
 private:	// User declarations
         CCtrlSystem        __CtrlSystem;
         CRobotImage        __RobotImage;
@@ -273,6 +277,7 @@ private:
         bool               __MouseDown;
         int                __MouseX;
         int                __MouseY;
+        bool               __SingleStepTest;
 private:
         Graphics::TBitmap *__BmpJoyStick;
 private:

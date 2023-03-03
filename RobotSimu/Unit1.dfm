@@ -190,12 +190,28 @@ object Form1: TForm1
         ImageIndex = 3
         OnClick = ToolButton11Click
       end
-      object ToolButton12: TToolButton
+      object ToolButton15: TToolButton
         Left = 748
+        Top = 0
+        AutoSize = True
+        Caption = #21333#27493#27979#35797
+        ImageIndex = 3
+        OnClick = ToolButton15Click
+      end
+      object ToolButton12: TToolButton
+        Left = 827
         Top = 0
         Caption = #20302#36895#27979#35797
         ImageIndex = 2
         OnClick = ToolButton12Click
+      end
+      object ToolButton16: TToolButton
+        Left = 902
+        Top = 0
+        AutoSize = True
+        Caption = #27491#24120#36895#24230
+        ImageIndex = 3
+        OnClick = ToolButton16Click
       end
     end
     object ToolBar1: TToolBar

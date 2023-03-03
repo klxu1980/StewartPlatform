@@ -19,7 +19,8 @@ __fastcall TForm1::TForm1(TComponent* Owner)
           __Initialized(false),
           __RobotImage(__CtrlSystem.Robot()),
           __hComm(0),
-          __hAccComm(0)
+          __hAccComm(0),
+          __SingleStepTest(false)
 {
    //InitFSX();
 
@@ -275,6 +276,9 @@ void __fastcall TForm1::TimerCtrlSimuTimer(TObject *Sender)
       ListViewPostures->Items->Item[4]->SubItems->Strings[1] = AnsiString().sprintf("%8.3f", __RobotImage.Robot()->UpperEuler[1]);
       ListViewPostures->Items->Item[5]->SubItems->Strings[1] = AnsiString().sprintf("%8.3f", __RobotImage.Robot()->UpperEuler[2]);
    }
+
+   if(__SingleStepTest)
+      TimerCtrlSimu->Enabled = false;
 }
 //---------------------------------------------------------------------------
 // SendOrder()
@@ -678,7 +682,6 @@ void __fastcall TForm1::ToolButton12Click(TObject *Sender)
    TimerComm->Interval = 2000;
 }
 //---------------------------------------------------------------------------
-
 void __fastcall TForm1::ToolButton11Click(TObject *Sender)
 {
    if(TimerCtrlSimu->Enabled)
@@ -691,6 +694,19 @@ void __fastcall TForm1::ToolButton11Click(TObject *Sender)
       TimerCtrlSimu->Enabled = true;
       TimerComm->Enabled = true;
    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::ToolButton15Click(TObject *Sender)
+{
+   __SingleStepTest = true;
+   TimerCtrlSimu->Enabled = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::ToolButton16Click(TObject *Sender)
+{
+   __SingleStepTest = false;
+   TimerCtrlSimu->Enabled = true;
 }
 //---------------------------------------------------------------------------
 

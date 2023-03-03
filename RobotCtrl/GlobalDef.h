@@ -87,8 +87,8 @@
    #define ROBOT_LOWER_BASE_LENGTH    0.050          // 机器人下平台短臂长度
 
    #define ACTIVE_SERVO_CNT           6
-   #define SERVO_PULSE_ROUND          2000          // 伺服转动一周对应脉冲数(每个控制周期脉冲数不超过65535，
-                                                     //   每秒脉冲总数不超过6553500，每秒最多50转，因此每转一周脉冲数不超过131,070。
+   #define SERVO_PULSE_ROUND          2000           // 伺服转动一周对应脉冲数(每个控制周期脉冲数不超过65535，
+                                                     // 每秒脉冲总数不超过6553500，每秒最多50转，因此每转一周脉冲数不超过131,070。
 																										 //   设定为10,000，台达伺服B2编码器1转脉冲为160,000，将电子齿轮分子(P1-44)设为160，分母(P1-45)为10。
    #define SERVO_ROUND_MM             5.0            // 伺服转动一周电缸直线运动距离，单位 mm
    #define SERVO_RPM_MIN              20             // 伺服最小转速，单位RPM
@@ -100,6 +100,8 @@
 
    #define INIT_Z_POSITION            1.3
    #define DEFAULT_Z_OFFSET           0.0
+
+   #define XYPLANE_HEIGHT             0.01
 #endif
 
 // 运动模拟参数

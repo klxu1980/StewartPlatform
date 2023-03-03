@@ -15,7 +15,6 @@
 // CJuneBugCtrl()
 //---------------------------------------------------------------------------
 CJuneBugCtrl::CJuneBugCtrl(void)
- : XYHeight(0.01)
 {
    // 设置机器人几何参数
    // 几何参数的相关常数定义在GlobalDef.h文件中
@@ -31,6 +30,9 @@ CJuneBugCtrl::CJuneBugCtrl(void)
    __Robot.JackServoBuffer = JACK_SERVO_DEC;
 
    __Robot.InitStructureParams();
+
+   // 机器人运动时的XY平面高度
+   XYHeight = XYPLANE_HEIGHT;
 
    // 最大速度约束(x, y, z, yaw, pitch, roll)
    MaxSpd[0] = 0.1;

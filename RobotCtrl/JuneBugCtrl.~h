@@ -35,7 +35,7 @@ public:
 public:
    // 机器人的运动指令
    // 机器人有两种平面运动：平移运动和旋转运动
-   float Dir;                           // 直线运动角度(单位deg)
+   float Dir;                          // 直线运动角度(单位deg)
    float Step;                         // 直线运动步长
    float Yaw;                          // 运动偏航角(单位deg)
    float XYHeight;                     // 运动平面高度(m)

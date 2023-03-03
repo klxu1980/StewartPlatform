@@ -157,7 +157,7 @@ void CJuneBugWorkSpace::GetWorkSpaceBorder(void)
       GetWorkSpaceBorderXY(Robot.RobotFKP.DefaultZ * 1000.0 + XYHeight);
 
       for(unsigned int i = 0; i < BorderXYZ.size(); ++i)
-         BorderXYZ[i].Z = Yaw;
+         BorderXYZ[i].Z = Yaw * 5;
       XYZ.insert(XYZ.end(), BorderXYZ.begin(), BorderXYZ.end());
    }
 

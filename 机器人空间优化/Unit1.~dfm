@@ -656,6 +656,7 @@ object Form1: TForm1
               Top = 0
               Caption = #21478#23384#36816#21160#31354#38388#22270#29255
               ImageIndex = 0
+              OnClick = ToolButton7Click
             end
           end
         end
