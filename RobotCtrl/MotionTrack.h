@@ -27,7 +27,7 @@ private:
 public:
    float MoveTime;
    float MaxMoveTime;
-   float PosEuler[6];   // 机器人在每个仕客德位置姿态，供底层运动控制程序使用
+   float PosEuler[6];   // 机器人在每个时刻的位置姿态，供底层运动控制程序使用
 private:
    double GetCurTime(void);
    void   Schedule(float Start[6], float VStart[6], float End[6], float VEnd[6]);

@@ -1,13 +1,13 @@
 //---------------------------------------------------------------------------
-
+// 2022.01.23：完成计算机上的仿真测试
 
 #pragma hdrstop
 
 #include "MotionTrack.h"
 #include "GlobalDef.h"
-#include <values.h>
+//#include <values.h>
 
-#include "Unit1.h"
+//#include "Unit1.h"
 //---------------------------------------------------------------------------
 
 #pragma package(smart_init)
