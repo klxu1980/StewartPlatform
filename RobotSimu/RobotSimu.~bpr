@@ -12,7 +12,7 @@
       ..\RobotCtrl\SimplexOptimizer.obj ..\RobotCtrl\RobotCali.obj 
       ..\RobotCtrl\RobotComm.obj ..\RobotCtrl\AccSensor.obj 
       ..\RobotCtrl\StableCtrl.obj ..\RobotCtrl\JuneBugCtrl.obj 
-      ..\RobotCtrl\MotionTrack.obj"/>
+      ..\RobotCtrl\MotionTrack.obj ..\RobotCtrl\CubicTrace.obj"/>
     <RESFILES value="RobotSimu.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -28,7 +28,7 @@
       inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
       bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
       indy.bpi bcb2kaxserver.bpi"/>
-    <PATHCPP value=".;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl"/>
+    <PATHCPP value=".;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -83,6 +83,7 @@
       <FILE FILENAME="..\RobotCtrl\StableCtrl.cpp" FORMNAME="" UNITNAME="StableCtrl" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\RobotCtrl\JuneBugCtrl.cpp" FORMNAME="" UNITNAME="JuneBugCtrl" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\RobotCtrl\MotionTrack.cpp" FORMNAME="" UNITNAME="MotionTrack" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\CubicTrace.cpp" FORMNAME="" UNITNAME="CubicTrace" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

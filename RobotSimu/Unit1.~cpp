@@ -703,3 +703,10 @@ void __fastcall TForm1::ToolButton15Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::ToolButton16Click(TObject *Sender)
+{
+   __SingleStepTest = false;
+   TimerCtrlSimu->Enabled = true;
+}
+//---------------------------------------------------------------------------
+

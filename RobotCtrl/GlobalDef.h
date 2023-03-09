@@ -136,6 +136,10 @@
    #define  CTRL_INTERVAL  0.01
 #endif
 
+// 电缸允许最大速度(m/s)和最大加速度(m/s^2)
+#define JACK_MAX_SPEED  0.25
+#define JACK_MAX_ACC    0.5
+
 // 控制器归零速度
 #define GO_ZERO_RPM          100     // 归零转速
 #define ZERO_2_CENTER_SPD    0.01    // 由零点向中心点移动速度(m/s)

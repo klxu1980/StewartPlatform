@@ -6,7 +6,7 @@
 class CCubicTrace
 {
 public:
-   double a[4];    // 四次多项式系数
+   double a[4];    // 三次多项式系数
    double MaxS;    // 最大允许速度
    double MaxA;    // 最大允许加速度
    double DecayK;  // 速度衰减系数

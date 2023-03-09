@@ -100,6 +100,8 @@
 
    #define INIT_Z_POSITION            1.3
    #define DEFAULT_Z_OFFSET           0.0
+
+   #define XYPLANE_HEIGHT             0.01
 #endif
 
 // 运动模拟参数
@@ -133,6 +135,9 @@
 #else
    #define  CTRL_INTERVAL  0.01
 #endif
+
+// 电缸允许最大速度(m/s)和最大加速度(m/s^2)
+#define JACK_MAX_SPEED
 
 // 控制器归零速度
 #define GO_ZERO_RPM          100     // 归零转速

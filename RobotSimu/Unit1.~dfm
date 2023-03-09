@@ -211,6 +211,7 @@ object Form1: TForm1
         AutoSize = True
         Caption = #27491#24120#36895#24230
         ImageIndex = 3
+        OnClick = ToolButton16Click
       end
     end
     object ToolBar1: TToolBar
