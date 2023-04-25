@@ -26,7 +26,7 @@ private:
    CStableCtrl        __StableCtrl;      // 减摆控制器
    CJuneBugCtrl       __JuneBugCtrl;     // 六足机器人控制器
    CMotionTracker     __MotionTrack;     // 实时运动跟踪
-   CRobotServo        __Servo;           // 机器人伺服控制器
+   CIncServo          __Servo;           // 机器人伺服控制器
    CRobotCommPkg      __CommPkg;         // 机器人通信报文
 private:    // 通信
    unsigned char      __FdkBytes[64];

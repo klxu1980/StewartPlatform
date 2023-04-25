@@ -17,7 +17,8 @@
 // 伺服电缸参数
 //#define ROBOT_2
 //#define ROBOT_1
-#define JUNE_BUG1
+//#define JUNE_BUG1
+#define ROBOT_3
 
 #ifdef ROBOT_1       // 办公室的机器人
    #define ROBOT_UPPER_ARM_LENGTH     0.375           // 机器人上平台长臂长度
@@ -58,6 +59,31 @@
    #define JACK_SERVO_LENGTH          0.4           // 伺服电缸最小运动行程，单位m(正常运动中，伺服要与限位开关保持一定缓冲距离)
    #define JACK_SERVO_DEC             0.05           // 伺服电缸最大运动行程，单位m
 #endif
+
+#ifdef ROBOT_3
+   #define ROBOT_UPPER_ARM_LENGTH     1.5           // 机器人上平台长臂长度
+   #define ROBOT_UPPER_BASE_LENGTH    0.2          // 机器人上平台短臂长度
+   #define ROBOT_LOWER_ARM_LENGTH     3.0           // 机器人下平台长臂长度
+   #define ROBOT_LOWER_BASE_LENGTH    0.2          // 机器人下平台短臂长度
+
+   #define ACTIVE_SERVO_CNT           6
+   #define SERVO_PULSE_ROUND          10000          // 伺服转动一周对应脉冲数(每个控制周期脉冲数不超过65535，
+                                                     //   每秒脉冲总数不超过6553500，每秒最多50转，因此每转一周脉冲数不超过131,070。
+																										 //   设定为10,000，台达伺服B2编码器1转脉冲为160,000，将电子齿轮分子(P1-44)设为160，分母(P1-45)为10。
+   #define SERVO_ROUND_MM             5.0            // 伺服转动一周电缸直线运动距离，单位 mm
+   #define SERVO_RPM_MIN              5              // 伺服最小转速，单位RPM
+   #define SERVO_RPM_MAX              3000           // 伺服最大转速，单位RPM
+
+   #define JACK_FIXED_LENGTH          3.0          // 伺服电缸固定部分长度(该长度指的是由基座到限位开关的位置，需要准确测量)
+   #define JACK_SERVO_LENGTH          2.0           // 伺服电缸最小运动行程，单位m(正常运动中，伺服要与限位开关保持一定缓冲距离)
+   #define JACK_SERVO_DEC             0.05           // 伺服电缸最大运动行程，单位m
+
+   #define DEFAULT_Z_OFFSET           0.0
+   #define XYPLANE_HEIGHT             0.01
+#endif
+
+
+
 
 #ifdef JUNE_BUG       // 六足爬行机器人
    #define ROBOT_UPPER_ARM_LENGTH     0.555          // 机器人上平台长臂长度

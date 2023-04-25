@@ -18,6 +18,30 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 CRobotServo::CRobotServo(void)
+{
+   for(int i = 0; i < 6; ++i)
+      __CurPosition[i] = __DstPosition[i] = 0.0;
+}
+//---------------------------------------------------------------------------
+double CRobotServo::FilterDestination(int Idx, double DstPosition)
+{
+   // 计算给定跟踪位置所产生的加速度，对该加速度限幅
+   __Positions[Idx][2] = __Positions[Idx][1];
+   __Positions[Idx][1] = __Positions[Idx][0];
+   __Positions[Idx][0] = DstPosition;
+
+   double a = (__Positions[Idx][0] - 2 * __Positions[Idx][1] + __Positions[Idx][2]) / (CTRL_INTERVAL * CTRL_INTERVAL);
+   if(a > __AccMax)
+      a = __AccMax;
+   else if(a < -__AccMax)
+      a = -__AccMax;
+
+   __Positions[Idx][0] = 2 * __Positions[Idx][1] - __Positions[Idx][2] + a * (CTRL_INTERVAL * CTRL_INTERVAL);
+
+   return __Positions[Idx][0];
+}
+//---------------------------------------------------------------------------
+CIncServo::CIncServo(void)
  : __Zeroing(false)
 {
    // 设置伺服传动参数(转动一周脉冲数、导程)
@@ -37,7 +61,7 @@ CRobotServo::CRobotServo(void)
 //---------------------------------------------------------------------------
 // ServoCtrl()
 //---------------------------------------------------------------------------
-void CRobotServo::ServoCtrl(void)
+void CIncServo::ServoCtrl(void)
 {
    if(__Zeroing)
       GoZeroCtrl();
@@ -47,7 +71,7 @@ void CRobotServo::ServoCtrl(void)
 //---------------------------------------------------------------------------
 // NormalCtrl()
 //---------------------------------------------------------------------------
-void CRobotServo::NormalCtrl(void)
+void CIncServo::NormalCtrl(void)
 {
    // 读取下部限位开关状态
    CtrlBoard.RefreshDIStatus();
@@ -122,7 +146,7 @@ void CRobotServo::NormalCtrl(void)
 #endif
 }
 //---------------------------------------------------------------------------
-void CRobotServo::GoZeroCtrl(void)
+void CIncServo::GoZeroCtrl(void)
 {
    // 计算每个控制周期中，归零脉冲数和频率
    int Pulse = GO_ZERO_RPM * SERVO_PULSE_ROUND * CTRL_INTERVAL / 60.0;
@@ -152,7 +176,7 @@ void CRobotServo::GoZeroCtrl(void)
 #endif
 }
 //---------------------------------------------------------------------------
-void CRobotServo::RobotMove(CRobot &Robot)
+void CIncServo::RobotMove(CRobot &Robot)
 {
    // 将目标位置换算为脉冲数
    double Length2Pulse = SERVO_PULSE_ROUND / SERVO_ROUND_MM;
@@ -165,7 +189,7 @@ void CRobotServo::RobotMove(CRobot &Robot)
    __DstPosition[5] = Robot.Jack[5].Servo * (SERVO_PULSE_ROUND / SERVO_ROUND_MM) * 1000.0 + 0.5;
 }
 //---------------------------------------------------------------------------
-bool CRobotServo::IsAllZeroed(void)
+bool CIncServo::IsAllZeroed(void)
 {
    __Zeroing = false;
 #ifndef __BORLANDC__
@@ -195,21 +219,4 @@ bool CRobotServo::IsAllZeroed(void)
 
    return true;
 }
-//---------------------------------------------------------------------------
-int CRobotServo::FilterDestination(int Idx, int DstPosition)
-{
-   // 计算给定跟踪位置所产生的加速度，对该加速度限幅
-   __Positions[Idx][2] = __Positions[Idx][1];
-   __Positions[Idx][1] = __CurPosition[Idx];
-   __Positions[Idx][0] = DstPosition;
 
-   int a = (__Positions[Idx][0] - 2 * __Positions[Idx][1] + __Positions[Idx][2]) / (CTRL_INTERVAL * CTRL_INTERVAL);
-   if(a > __MaxAccByPulse)
-      a = __MaxAccByPulse;
-   else if(a < -__MaxAccByPulse)
-      a = -__MaxAccByPulse;
-
-   __Positions[Idx][0] = 2 * __Positions[Idx][1] - __Positions[Idx][2] + a * (CTRL_INTERVAL * CTRL_INTERVAL);
-
-   return __Positions[Idx][0];
-}
