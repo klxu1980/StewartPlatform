@@ -17,30 +17,6 @@
 
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-CRobotServo::CRobotServo(void)
-{
-   for(int i = 0; i < 6; ++i)
-      __CurPosition[i] = __DstPosition[i] = 0.0;
-}
-//---------------------------------------------------------------------------
-double CRobotServo::FilterDestination(int Idx, double DstPosition)
-{
-   // 计算给定跟踪位置所产生的加速度，对该加速度限幅
-   __Positions[Idx][2] = __Positions[Idx][1];
-   __Positions[Idx][1] = __Positions[Idx][0];
-   __Positions[Idx][0] = DstPosition;
-
-   double a = (__Positions[Idx][0] - 2 * __Positions[Idx][1] + __Positions[Idx][2]) / (CTRL_INTERVAL * CTRL_INTERVAL);
-   if(a > __AccMax)
-      a = __AccMax;
-   else if(a < -__AccMax)
-      a = -__AccMax;
-
-   __Positions[Idx][0] = 2 * __Positions[Idx][1] - __Positions[Idx][2] + a * (CTRL_INTERVAL * CTRL_INTERVAL);
-
-   return __Positions[Idx][0];
-}
-//---------------------------------------------------------------------------
 CIncServo::CIncServo(void)
  : __Zeroing(false)
 {
@@ -219,4 +195,60 @@ bool CIncServo::IsAllZeroed(void)
 
    return true;
 }
+//---------------------------------------------------------------------------
+int CIncServo::FilterDestination(int Idx, int DstPosition)
+{
+   // 计算给定跟踪位置所产生的加速度，对该加速度限幅
+   __Positions[Idx][2] = __Positions[Idx][1];
+   __Positions[Idx][1] = __CurPosition[Idx];
+   __Positions[Idx][0] = DstPosition;
 
+   int a = (__Positions[Idx][0] - 2 * __Positions[Idx][1] + __Positions[Idx][2]) / (CTRL_INTERVAL * CTRL_INTERVAL);
+   if(a > __MaxAccByPulse)
+      a = __MaxAccByPulse;
+   else if(a < -__MaxAccByPulse)
+      a = -__MaxAccByPulse;
+
+   __Positions[Idx][0] = 2 * __Positions[Idx][1] - __Positions[Idx][2] + a * (CTRL_INTERVAL * CTRL_INTERVAL);
+
+   return __Positions[Idx][0];
+}
+//---------------------------------------------------------------------------
+CROSServo::CROSServo(void)
+{
+   for(int i = 0; i < 6; ++i)
+      __CurPosition[i] = 0.0;
+}
+//---------------------------------------------------------------------------
+// ServoCtrl()
+//---------------------------------------------------------------------------
+void CROSServo::ServoCtrl(void)
+{
+   // 在这里输出电缸长度
+
+
+#ifdef __BORLANDC__
+   if(Form1->ListViewJacks->Items->Count)
+   {
+      for(int i = 0; i < 6; ++i)
+         Form1->ListViewJacks->Items->Item[i]->SubItems->Strings[0] = AnsiString().sprintf("%8.1f", __CurPosition[i]);
+   }
+#endif
+}
+//---------------------------------------------------------------------------
+void CROSServo::RobotMove(CRobot &Robot)
+{
+   for(int i = 0; i < 6; ++i)
+      __CurPosition[i] = Robot.Jack[i].Servo;
+}
+//---------------------------------------------------------------------------
+void CROSServo::GoZero(void)
+{
+   for(int i = 0; i < 6; ++i)
+      __CurPosition[i] = 0.0;
+}
+//---------------------------------------------------------------------------
+bool CROSServo::IsAllZeroed(void)
+{
+   return true;
+}

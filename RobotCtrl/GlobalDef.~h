@@ -61,9 +61,9 @@
 #endif
 
 #ifdef ROBOT_3
-   #define ROBOT_UPPER_ARM_LENGTH     1.5           // 机器人上平台长臂长度
+   #define ROBOT_UPPER_ARM_LENGTH     1.0           // 机器人上平台长臂长度
    #define ROBOT_UPPER_BASE_LENGTH    0.2          // 机器人上平台短臂长度
-   #define ROBOT_LOWER_ARM_LENGTH     3.0           // 机器人下平台长臂长度
+   #define ROBOT_LOWER_ARM_LENGTH     2.5           // 机器人下平台长臂长度
    #define ROBOT_LOWER_BASE_LENGTH    0.2          // 机器人下平台短臂长度
 
    #define ACTIVE_SERVO_CNT           6
@@ -74,8 +74,8 @@
    #define SERVO_RPM_MIN              5              // 伺服最小转速，单位RPM
    #define SERVO_RPM_MAX              3000           // 伺服最大转速，单位RPM
 
-   #define JACK_FIXED_LENGTH          2.5          // 伺服电缸固定部分长度(该长度指的是由基座到限位开关的位置，需要准确测量)
-   #define JACK_SERVO_LENGTH          2.0           // 伺服电缸最小运动行程，单位m(正常运动中，伺服要与限位开关保持一定缓冲距离)
+   #define JACK_FIXED_LENGTH          2.2          // 伺服电缸固定部分长度(该长度指的是由基座到限位开关的位置，需要准确测量)
+   #define JACK_SERVO_LENGTH          1.5           // 伺服电缸最小运动行程，单位m(正常运动中，伺服要与限位开关保持一定缓冲距离)
    #define JACK_SERVO_DEC             0.05           // 伺服电缸最大运动行程，单位m
 
    #define DEFAULT_Z_OFFSET           0.0
@@ -149,7 +149,10 @@
 
 // 减摆控制
 // 由于减摆控制需要使用UART2和UART3，因此减摆控制时，无法进行正常的上位机通信控制
-//#define SYS_STABLE_CTRL   
+//#define SYS_STABLE_CTRL
+
+#define ROS_SERVO
+#define INC_SERVO
 
 
 //---------------------------------------------------------------------------
