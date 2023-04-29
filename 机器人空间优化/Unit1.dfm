@@ -1077,7 +1077,7 @@ object Form1: TForm1
           MaxValue = 100
           MinValue = 1
           TabOrder = 3
-          Value = 1
+          Value = 10
           OnChange = CSpinEdit14Change
         end
       end

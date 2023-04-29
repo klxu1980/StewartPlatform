@@ -26,6 +26,8 @@ public:
    float RollMin;
    float RollMax;
    float Z;
+   float MinJackForce;
+   float MaxJackForce;
 private:
    bool IsFeasible(int X, int Y, int Z);         // 检测特定位置能否到达
    void BeginEnumInitXY(int Z);

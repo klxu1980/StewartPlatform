@@ -206,6 +206,7 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
       CSpinEdit18->Value    = CSpinEdit17->MaxValue;
 
       Application->MessageBox("机器人运动空间计算结束", "", MB_OK | MB_ICONINFORMATION);
+      Application->MessageBox(AnsiString().sprintf("最小、最大受力 = %1.3f, %1.3f", __RobotSpace.MinJackForce, __RobotSpace.MaxJackForce).c_str(), "", MB_OK | MB_ICONINFORMATION);
    }
    else
       Application->MessageBox("该约束条件下无可用空间", "", MB_OK | MB_ICONINFORMATION);

@@ -6,6 +6,7 @@
 #include "Robot.h"
 #include <math.h>
 #include "GlobalDef.h"
+#include "NRCpp\nr.h"
 
 #ifdef __BORLANDC__
 //#include "Unit1.h"
@@ -205,4 +206,121 @@ void CRobot::PlatformZeroed(void)
    float Z = PlatformMinHeight();
    CopyVector(RobotIKP.UpperPos, 0, 0, Z);
    CopyVector(RobotIKP.UpperEuler, 0, 0, 0);
+}
+//---------------------------------------------------------------------------
+bool gaussj(Mat_IO_DP &a, Mat_IO_DP &b);
+bool CRobot::CalcForceOfJacks(double Force[3], double Torque[3])
+{
+   // 计算每个连杆作用力的方向矢量，方向为下平台指向上平台(即，默认情况下连杆承受压力)
+   double FV[6][3];
+   for(int i = 0; i < 6; ++i)
+   {
+      FV[i][0] = RobotIKP.UpperJointInLowerCoordinate[i][0] - RobotIKP.LowerJointInLowerCoordinate[i][0];
+      FV[i][1] = RobotIKP.UpperJointInLowerCoordinate[i][1] - RobotIKP.LowerJointInLowerCoordinate[i][1];
+      FV[i][2] = RobotIKP.UpperJointInLowerCoordinate[i][2] - RobotIKP.LowerJointInLowerCoordinate[i][2];
+
+      Normalize(FV[i]);
+   }
+
+   // 计算质心位置在下平台坐标系中的坐标
+   // 在这里质心省略为上平台中心，因此质心坐标等于上平台中心坐标
+   double MidPos[3] = {RobotIKP.UpperPos[0], RobotIKP.UpperPos[1], RobotIKP.UpperPos[2]};
+   //MatrixMultiVector(MidPos, __RMatrix, __Middle);
+   //VectorAddVector(MidPos, MidPos, __UpperPos);
+
+   // 计算力臂矢量，该矢量应当由铰接点指向质心
+   double Arm[6][3];
+   for(int i = 0; i < 6; ++i)
+      VectorSubVector(Arm[i], RobotIKP.UpperJointInLowerCoordinate[i], MidPos);
+
+   // 计算力矩矢量，即连杆作用力方向矢量与力臂矢量之间的叉积
+   double TV[6][3];
+   for(int i = 0; i < 6; ++i)
+      CalcCrossProduct(TV[i], FV[i], Arm[i]);
+
+   // 通过求解线性方程获得每个连杆的力
+   // 线性方程组的形式如下：
+   // F[0]FV[0] + F[1]FV[1] + ... + F[5]FV[5] = Force     (连杆力的合力等于上平台所受力)
+   // F[0]TV[0] + F[1]TV[1] + ... + F[5]TV[5] = Torque    (连杆力矩的合力矩等于上平台所受力矩)
+   Mat_DP M(6, 6);
+   for(int i = 0; i < 6; ++i)
+   {
+      M[0][i] = FV[i][0];
+      M[1][i] = FV[i][1];
+      M[2][i] = FV[i][2];
+
+      M[3][i] = TV[i][0];
+      M[4][i] = TV[i][1];
+      M[5][i] = TV[i][2];
+   }
+
+   // 外部力和力矩
+   Mat_DP F(6, 1);
+   F[0][0] = Force[0];
+   F[1][0] = Force[1];
+   F[2][0] = Force[2];
+
+   F[3][0] = Torque[0];
+   F[4][0] = Torque[1];
+   F[5][0] = Torque[2];
+
+   // 通过高斯消元法求解连杆力
+   bool rst = gaussj(M, F);
+   if(rst)
+   {
+      for(int i = 0; i < 6; ++i)
+         Jack[i].Force = F[i][0];
+   }
+   return rst;
+}
+
+bool gaussj(Mat_IO_DP &a, Mat_IO_DP &b)
+{
+	int i,icol,irow,j,k,l,ll;
+	DP big,dum,pivinv;
+
+	int n=a.nrows();
+	int m=b.ncols();
+	Vec_INT indxc(n),indxr(n),ipiv(n);
+	for (j=0;j<n;j++) ipiv[j]=0;
+	for (i=0;i<n;i++) {
+		big=0.0;
+		for (j=0;j<n;j++)
+			if (ipiv[j] != 1)
+				for (k=0;k<n;k++) {
+					if (ipiv[k] == 0) {
+						if (fabs(a[j][k]) >= big) {
+							big=fabs(a[j][k]);
+							irow=j;
+							icol=k;
+						}
+					}
+				}
+		++(ipiv[icol]);
+		if (irow != icol) {
+			for (l=0;l<n;l++) SWAP(a[irow][l],a[icol][l]);
+			for (l=0;l<m;l++) SWAP(b[irow][l],b[icol][l]);
+		}
+		indxr[i]=irow;
+		indxc[i]=icol;
+		if (a[icol][icol] == 0.0)   // 出现奇异值
+                   return false;
+		pivinv=1.0/a[icol][icol];
+		a[icol][icol]=1.0;
+		for (l=0;l<n;l++) a[icol][l] *= pivinv;
+		for (l=0;l<m;l++) b[icol][l] *= pivinv;
+		for (ll=0;ll<n;ll++)
+			if (ll != icol) {
+				dum=a[ll][icol];
+				a[ll][icol]=0.0;
+				for (l=0;l<n;l++) a[ll][l] -= a[icol][l]*dum;
+				for (l=0;l<m;l++) b[ll][l] -= b[icol][l]*dum;
+			}
+	}
+	for (l=n-1;l>=0;l--) {
+		if (indxr[l] != indxc[l])
+			for (k=0;k<n;k++)
+				SWAP(a[k][indxr[l]],a[k][indxc[l]]);
+	}
+        return true;
 }

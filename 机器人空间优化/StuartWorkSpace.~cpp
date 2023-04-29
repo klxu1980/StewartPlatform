@@ -48,6 +48,28 @@ bool CStuartWorkSpace::IsFeasible(int X, int Y, int Z)
 
       if(Robot.Constrained)
          return false;
+      else
+      {          /*
+         double Force[3] = {0, 0, -1};
+         double Torque[3] = {0, 0, 0};
+         if(!Robot.CalcForceOfJacks(Force, Torque))
+            return false;
+
+         double MaxForce = -MAXFLOAT;
+         double MinForce = MAXFLOAT;
+
+         for(int i = 0; i < 6; ++i)
+         {
+            if(Robot.Jack[i].Force < MinJackForce)
+               MinForce = Robot.Jack[i].Force;
+            if(Robot.Jack[i].Force > MaxJackForce)
+               MaxForce = Robot.Jack[i].Force;
+         }
+
+         if(MaxForce > 5.0 || MinForce < -5.0)
+            return false;
+            */      
+      }
    }
 
    return true;
@@ -85,7 +107,9 @@ void CStuartWorkSpace::GetWorkSpaceBorder(void)
 
    // 从0高度开始，搜索每个Z轴高度上的运动边界
    BorderXYZ.clear();
-   for(int Z = 0; Z <= 5000; ++Z)
+   MinJackForce = MAXFLOAT;
+   MaxJackForce = -MAXFLOAT;
+   for(int Z = 0; Z <= 10000; ++Z)
       GetWorkSpaceBorderXY(Z);
 }
 //---------------------------------------------------------------------------
@@ -157,7 +181,7 @@ void CJuneBugWorkSpace::GetWorkSpaceBorder(void)
       GetWorkSpaceBorderXY(Robot.RobotFKP.DefaultZ * 1000.0 + XYHeight);
 
       for(unsigned int i = 0; i < BorderXYZ.size(); ++i)
-         BorderXYZ[i].Z = Yaw;
+         BorderXYZ[i].Z = Yaw * 5;
       XYZ.insert(XYZ.end(), BorderXYZ.begin(), BorderXYZ.end());
    }
 

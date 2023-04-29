@@ -249,7 +249,7 @@ void __fastcall TForm1::ToolButton2Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::TimerCtrlSimuTimer(TObject *Sender)
-{            
+{
    if(!__Initialized)
       return;
 
@@ -262,6 +262,7 @@ void __fastcall TForm1::TimerCtrlSimuTimer(TObject *Sender)
    // 显示机器人计算结果
    if(ListViewPostures->Items->Count)
    {
+      // 显示给定位姿
       ListViewPostures->Items->Item[0]->SubItems->Strings[0] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().PosX() * 1000);
       ListViewPostures->Items->Item[1]->SubItems->Strings[0] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().PosY() * 1000);
       ListViewPostures->Items->Item[2]->SubItems->Strings[0] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().PosZ() * 1000);
@@ -269,12 +270,28 @@ void __fastcall TForm1::TimerCtrlSimuTimer(TObject *Sender)
       ListViewPostures->Items->Item[4]->SubItems->Strings[0] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().PosPitch());
       ListViewPostures->Items->Item[5]->SubItems->Strings[0] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().PosRoll());
 
+      // 显示正向运动计算位姿
       ListViewPostures->Items->Item[0]->SubItems->Strings[1] = AnsiString().sprintf("%8.3f", __RobotImage.Robot()->UpperPos[0] * 1000);
       ListViewPostures->Items->Item[1]->SubItems->Strings[1] = AnsiString().sprintf("%8.3f", __RobotImage.Robot()->UpperPos[1] * 1000);
       ListViewPostures->Items->Item[2]->SubItems->Strings[1] = AnsiString().sprintf("%8.3f", __RobotImage.Robot()->UpperPos[2] * 1000);
       ListViewPostures->Items->Item[3]->SubItems->Strings[1] = AnsiString().sprintf("%8.3f", __RobotImage.Robot()->UpperEuler[0]);
       ListViewPostures->Items->Item[4]->SubItems->Strings[1] = AnsiString().sprintf("%8.3f", __RobotImage.Robot()->UpperEuler[1]);
       ListViewPostures->Items->Item[5]->SubItems->Strings[1] = AnsiString().sprintf("%8.3f", __RobotImage.Robot()->UpperEuler[2]);
+
+      // 显示电缸受力
+      double F[3] = {0, 0, -1};
+      double T[3] = {0, 0, 0};
+      bool rst = __CtrlSystem.Robot().CalcForceOfJacks(F, T);
+
+      if(rst)
+      {
+         ListViewJacks->Items->Item[0]->SubItems->Strings[3] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().Jack[0].Force);
+         ListViewJacks->Items->Item[0]->SubItems->Strings[3] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().Jack[1].Force);
+         ListViewJacks->Items->Item[0]->SubItems->Strings[3] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().Jack[2].Force);
+         ListViewJacks->Items->Item[0]->SubItems->Strings[3] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().Jack[3].Force);
+         ListViewJacks->Items->Item[0]->SubItems->Strings[3] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().Jack[4].Force);
+         ListViewJacks->Items->Item[0]->SubItems->Strings[3] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().Jack[5].Force);
+      }
    }
 
    if(__SingleStepTest)
@@ -709,4 +726,3 @@ void __fastcall TForm1::ToolButton16Click(TObject *Sender)
    TimerCtrlSimu->Enabled = true;
 }
 //---------------------------------------------------------------------------
-

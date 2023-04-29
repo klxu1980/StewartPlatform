@@ -152,7 +152,7 @@
 //#define SYS_STABLE_CTRL
 
 #define ROS_SERVO
-#define INC_SERVO
+//#define INC_SERVO
 
 
 //---------------------------------------------------------------------------

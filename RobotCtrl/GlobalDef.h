@@ -63,7 +63,7 @@
 #ifdef ROBOT_3
    #define ROBOT_UPPER_ARM_LENGTH     1.0           // 机器人上平台长臂长度
    #define ROBOT_UPPER_BASE_LENGTH    0.2          // 机器人上平台短臂长度
-   #define ROBOT_LOWER_ARM_LENGTH     2.5           // 机器人下平台长臂长度
+   #define ROBOT_LOWER_ARM_LENGTH     2.0           // 机器人下平台长臂长度
    #define ROBOT_LOWER_BASE_LENGTH    0.2          // 机器人下平台短臂长度
 
    #define ACTIVE_SERVO_CNT           6

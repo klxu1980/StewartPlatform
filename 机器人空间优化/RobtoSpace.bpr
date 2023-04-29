@@ -8,7 +8,13 @@
       ..\RobotCtrl\RobotBasic.obj ..\RobotCtrl\RobotFKP.obj 
       ..\RobotCtrl\RobotIKP.obj ..\RobotCtrl\BasicCalc.obj 
       ..\RobotCtrl\SimplexOptimizer.obj StuartWorkSpace.obj SpaceFile.obj 
-      Space3DView.obj CubeSpace.obj Unit2.obj"/>
+      Space3DView.obj CubeSpace.obj Unit2.obj ..\RobotCtrl\NRCpp\covsrt.obj 
+      ..\RobotCtrl\NRCpp\DataEstimate.obj ..\RobotCtrl\NRCpp\fit.obj 
+      ..\RobotCtrl\NRCpp\fpoly.obj ..\RobotCtrl\NRCpp\gammln.obj 
+      ..\RobotCtrl\NRCpp\gammq.obj ..\RobotCtrl\NRCpp\gaussj.obj 
+      ..\RobotCtrl\NRCpp\gcf.obj ..\RobotCtrl\NRCpp\gser.obj 
+      ..\RobotCtrl\NRCpp\lfit.obj ..\RobotCtrl\NRCpp\nrexit.obj 
+      ..\RobotCtrl\NRCpp\ran1.obj"/>
     <RESFILES value="RobtoSpace.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -24,7 +30,7 @@
       inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
       bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
       indy.bpi bcb2kaxserver.bpi"/>
-    <PATHCPP value=".;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl"/>
+    <PATHCPP value=".;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl;..\RobotCtrl\NRCpp;..\RobotCtrl\NRCpp;..\RobotCtrl\NRCpp;..\RobotCtrl\NRCpp;..\RobotCtrl\NRCpp;..\RobotCtrl\NRCpp;..\RobotCtrl\NRCpp;..\RobotCtrl\NRCpp;..\RobotCtrl\NRCpp;..\RobotCtrl\NRCpp;..\RobotCtrl\NRCpp;..\RobotCtrl\NRCpp"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -34,14 +40,14 @@
     <USERDEFINES value="_DEBUG"/>
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="RobtoSpace.cpp"/>
-    <INCLUDEPATH value="&quot;..\机器人空间优化 - 副本&quot;;..\RobotCtrl;RobotCtrl;D:\Borland\CBuilder6\Projects;&quot;G:\01 我的设计\12 在学校的项目\02 并联机器人\机器人空间优化&quot;;$(BCB)\include;$(BCB)\include\vcl"/>
-    <LIBPATH value="&quot;..\机器人空间优化 - 副本&quot;;..\RobotCtrl;RobotCtrl;D:\Borland\CBuilder6\Projects;&quot;G:\01 我的设计\12 在学校的项目\02 并联机器人\机器人空间优化&quot;;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <INCLUDEPATH value="..\RobotCtrl\NRCpp;&quot;..\机器人空间优化 - 副本&quot;;..\RobotCtrl;RobotCtrl;D:\Borland\CBuilder6\Projects;&quot;G:\01 我的设计\12 在学校的项目\02 并联机器人\机器人空间优化&quot;;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\RobotCtrl\NRCpp;&quot;..\机器人空间优化 - 副本&quot;;..\RobotCtrl;RobotCtrl;D:\Borland\CBuilder6\Projects;&quot;G:\01 我的设计\12 在学校的项目\02 并联机器人\机器人空间优化&quot;;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
     <WARNINGS value="-w-par"/>
     <OTHERFILES value=""/>
   </MACROS>
   <OPTIONS>
-    <IDLCFLAGS value="-I&quot;..\机器人空间优化 - 副本&quot; -I..\RobotCtrl -IRobotCtrl 
-      -ID:\Borland\CBuilder6\Projects 
+    <IDLCFLAGS value="-I..\RobotCtrl\NRCpp -I&quot;..\机器人空间优化 - 副本&quot; -I..\RobotCtrl 
+      -IRobotCtrl -ID:\Borland\CBuilder6\Projects 
       -I&quot;G:\01 我的设计\12 在学校的项目\02 并联机器人\机器人空间优化&quot; 
       -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp -D_DEBUG -boa"/>
     <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v -vi- -c 
@@ -74,6 +80,18 @@
       <FILE FILENAME="Space3DView.cpp" FORMNAME="" UNITNAME="Space3DView" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="CubeSpace.cpp" FORMNAME="" UNITNAME="CubeSpace" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Unit2.cpp" FORMNAME="Form2" UNITNAME="Unit2" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\NRCpp\covsrt.cpp" FORMNAME="" UNITNAME="covsrt.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\NRCpp\DataEstimate.cpp" FORMNAME="" UNITNAME="DataEstimate.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\NRCpp\fit.cpp" FORMNAME="" UNITNAME="fit.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\NRCpp\fpoly.cpp" FORMNAME="" UNITNAME="fpoly.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\NRCpp\gammln.cpp" FORMNAME="" UNITNAME="gammln.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\NRCpp\gammq.cpp" FORMNAME="" UNITNAME="gammq.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\NRCpp\gaussj.cpp" FORMNAME="" UNITNAME="gaussj.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\NRCpp\gcf.cpp" FORMNAME="" UNITNAME="gcf.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\NRCpp\gser.cpp" FORMNAME="" UNITNAME="gser.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\NRCpp\lfit.cpp" FORMNAME="" UNITNAME="lfit.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\NRCpp\nrexit.cpp" FORMNAME="" UNITNAME="nrexit.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\RobotCtrl\NRCpp\ran1.cpp" FORMNAME="" UNITNAME="ran1.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

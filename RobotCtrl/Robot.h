@@ -117,5 +117,7 @@ public:
    void AfterServoMoved(double Servo1, double Servo2, double Servo3, double Servo4, double Servo5, double Servo6);
    void AfterServoMoved(void);
    void PlatformZeroed(void);
+public:
+   bool CalcForceOfJacks(double Force[3], double Torque[3]);
 };
 #endif

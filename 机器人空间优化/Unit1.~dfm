@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 299
-  Top = 253
+  Left = -8
+  Top = -8
   Width = 1616
-  Height = 916
+  Height = 876
   Caption = #24182#32852#26426#22120#20154#36816#21160#31354#38388
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object Form1: TForm1
     Left = 207
     Top = 0
     Width = 185
-    Height = 878
+    Height = 838
     Align = alLeft
     BorderWidth = 5
     TabOrder = 0
@@ -294,7 +294,7 @@ object Form1: TForm1
     Left = 392
     Top = 0
     Width = 1208
-    Height = 878
+    Height = 838
     Align = alClient
     Caption = 'Panel2'
     TabOrder = 1
@@ -302,7 +302,7 @@ object Form1: TForm1
       Left = 1
       Top = 27
       Width = 1206
-      Height = 850
+      Height = 810
       ActivePage = TabSheet2
       Align = alClient
       MultiLine = True
@@ -554,7 +554,7 @@ object Form1: TForm1
           Left = 0
           Top = 29
           Width = 1181
-          Height = 813
+          Height = 773
           BackWall.Brush.Color = clWhite
           BackWall.Brush.Style = bsClear
           Title.Text.Strings = (
@@ -780,10 +780,10 @@ object Form1: TForm1
     Left = 0
     Top = 0
     Width = 207
-    Height = 878
-    ActivePage = TabSheet5
+    Height = 838
+    ActivePage = TabSheet3
     Align = alLeft
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 2
     object TabSheet3: TTabSheet
       Caption = #24182#32852#26426#22120#20154
