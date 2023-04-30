@@ -253,7 +253,8 @@ void CCtrlSystem::MotionSimuCtrl(void)
    __Simulator.GetPlatformPosition(X, Y, Z, Yaw, Pitch, Roll);
 
    // 机器人运动
-   __Robot.PlatformMove(-X, -Y, -Z - __Robot.CenterZ, -Yaw, -Pitch, -Roll);
+   //__Robot.PlatformMove(-X, -Y, -Z - __Robot.CenterZ, -Yaw, -Pitch, -Roll);
+   __Robot.PlatformMove(X, Y, Z + __Robot.CenterZ, Yaw, Pitch, Roll);
 }
 //---------------------------------------------------------------------------
 // DirectPosEurlarCtrl()

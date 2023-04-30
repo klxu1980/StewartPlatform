@@ -278,6 +278,18 @@ void __fastcall TForm1::TimerCtrlSimuTimer(TObject *Sender)
       ListViewPostures->Items->Item[4]->SubItems->Strings[1] = AnsiString().sprintf("%8.3f", __RobotImage.Robot()->UpperEuler[1]);
       ListViewPostures->Items->Item[5]->SubItems->Strings[1] = AnsiString().sprintf("%8.3f", __RobotImage.Robot()->UpperEuler[2]);
 
+      // 显示电缸长度
+      #ifdef INC_SERVO
+      /*
+      for(int i = 0; i < 6; ++i)
+      {
+         ListViewJacks->Items->Item[i]->SubItems->Strings[0] = AnsiString().sprintf("%8.1f", __CurPosition[i] * SERVO_ROUND_MM / SERVO_PULSE_ROUND);
+         ListViewJacks->Items->Item[i]->SubItems->Strings[1] = IntToStr(__PulseCnt[i]);
+         ListViewJacks->Items->Item[i]->SubItems->Strings[2] = AnsiString().sprintf("%8.1f", __PulseCnt[i] * 60.0 / (SERVO_PULSE_ROUND * CTRL_INTERVAL) );
+      }
+      */
+      #endif
+
       // 显示电缸受力
       double F[3] = {0, 0, -1};
       double T[3] = {0, 0, 0};
@@ -286,6 +298,20 @@ void __fastcall TForm1::TimerCtrlSimuTimer(TObject *Sender)
       if(rst)
       {
          ListViewJacks->Items->Item[0]->SubItems->Strings[3] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().Jack[0].Force);
+         ListViewJacks->Items->Item[1]->SubItems->Strings[3] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().Jack[1].Force);
+         ListViewJacks->Items->Item[2]->SubItems->Strings[3] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().Jack[2].Force);
+         ListViewJacks->Items->Item[3]->SubItems->Strings[3] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().Jack[3].Force);
+         ListViewJacks->Items->Item[4]->SubItems->Strings[3] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().Jack[4].Force);
+         ListViewJacks->Items->Item[5]->SubItems->Strings[3] = AnsiString().sprintf("%8.3f", __CtrlSystem.Robot().Jack[5].Force);
+      }
+      else
+      {
+         ListViewJacks->Items->Item[0]->SubItems->Strings[3] = "S";
+         ListViewJacks->Items->Item[1]->SubItems->Strings[3] = "S";
+         ListViewJacks->Items->Item[2]->SubItems->Strings[3] = "S";
+         ListViewJacks->Items->Item[3]->SubItems->Strings[3] = "S";
+         ListViewJacks->Items->Item[4]->SubItems->Strings[3] = "S";
+         ListViewJacks->Items->Item[5]->SubItems->Strings[3] = "S";
       }
    }
 
@@ -417,9 +443,9 @@ void TForm1::SendMotionSimuOrder(void)
       Acc.AccX = CSpinEdit1->Value * 0.1;
       Acc.AccY = CSpinEdit2->Value * 0.1;
       Acc.AccZ = CSpinEdit3->Value * 0.1;
-      Acc.AccYaw   = CSpinEdit4->Value;
-      Acc.AccPitch = CSpinEdit5->Value;
-      Acc.AccRoll  = CSpinEdit6->Value;
+      Acc.AccYaw   = CSpinEdit4->Value * 0.1;
+      Acc.AccPitch = CSpinEdit5->Value * 0.1;
+      Acc.AccRoll  = CSpinEdit6->Value * 0.1;
    }
 
    __RobotCommPkg.BuildAccCtrlOrder(Acc.AccX, Acc.AccY, Acc.AccZ, Acc.AccYaw, Acc.AccPitch, Acc.AccRoll);

@@ -69,6 +69,11 @@ bool CStuartWorkSpace::IsFeasible(int X, int Y, int Z)
          if(MaxForce > 5.0 || MinForce < -5.0)
             return false;
 
+         // 这里不能删除，会导致计算出错!
+         if(MinForce < MinJackForce)
+            MinJackForce = MinForce;
+         if(MaxForce > MaxJackForce)
+            MaxJackForce = MaxForce;
       }
    }
 

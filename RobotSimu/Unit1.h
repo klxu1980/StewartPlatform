@@ -230,6 +230,7 @@ __published:	// IDE-managed Components
         TEdit *Edit1;
         TToolButton *ToolButton15;
         TToolButton *ToolButton16;
+        TEdit *Edit2;
         void __fastcall PaintBox1MouseDown(TObject *Sender,
           TMouseButton Button, TShiftState Shift, int X, int Y);
         void __fastcall PaintBox1MouseUp(TObject *Sender,

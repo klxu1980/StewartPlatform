@@ -63,6 +63,7 @@ public:
    CMoveStatus MoveStatus;         // 运动状态
    double      CenterZ;            // 中心位置Z坐标
    bool        Constrained;        // 运动受到约束条件限制
+   double      ForceDet;           // 电缸受力计算时系数阵的行列式，用于评估奇异性
 public:
    // 直线连杆
    struct  CJack
@@ -80,6 +81,7 @@ private:
    void   RotateAroundZ(double Rst[3], double Src[3], double Angle);
    double Sigmoid(double Xi){return 2.0 / (exp(-2.0 * Xi / JackServoBuffer) + 1.0) - 1.0;}
    double LimitServo(double Servo);
+   double CalcDeterminant(double FV[6][3], double TV[6][3]);
 public:
    CRobot(void);
    void InitStructureParams(void);   // 初始化结构参数

@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = -50
-  Top = 149
+  Left = -25
+  Top = 176
   Width = 1600
   Height = 900
   Caption = #24182#32852#26426#22120#20154#27979#35797
@@ -213,6 +213,14 @@ object Form1: TForm1
         ImageIndex = 3
         OnClick = ToolButton16Click
       end
+      object Edit2: TEdit
+        Left = 981
+        Top = 0
+        Width = 121
+        Height = 22
+        TabOrder = 5
+        Text = 'Edit2'
+      end
     end
     object ToolBar1: TToolBar
       Left = 9
@@ -325,10 +333,10 @@ object Form1: TForm1
       Top = 504
       Width = 400
       Height = 433
-      ActivePage = TabSheetRobot
+      ActivePage = TabSheet2
       Align = alTop
       MultiLine = True
-      TabIndex = 0
+      TabIndex = 2
       TabOrder = 0
       object TabSheetRobot: TTabSheet
         Caption = #20301#23039#25511#21046

@@ -14,8 +14,8 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 CWorkSpace::CWorkSpace(void)
- : __XMax(1500),
-   __YMax(1500)
+ : __XMax(2000),
+   __YMax(2000)
 {
    __XYVisited = new bool[(__XMax * 2 + 1) * (__YMax * 2 + 1)];
 }

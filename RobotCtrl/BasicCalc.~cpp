@@ -5,6 +5,9 @@
 
 #include "BasicCalc.h"
 #include <math.h>
+#ifndef M_PI
+#define M_PI  3.1415926
+#endif
 //---------------------------------------------------------------------------
 
 #pragma package(smart_init)
@@ -34,9 +37,9 @@ void TransMatrix(double Rst[3][3], double Src[3][3])
    Rst[1][1] = Src[1][1];
    Rst[1][2] = Src[2][1];
 
-   Rst[2][0] = Src[0][0];
-   Rst[2][1] = Src[0][0];
-   Rst[2][2] = Src[0][0];
+   Rst[2][0] = Src[0][2];
+   Rst[2][1] = Src[1][2];
+   Rst[2][2] = Src[2][2];
 }
 //---------------------------------------------------------------------------
 // MatrixMultiVector()
@@ -231,6 +234,9 @@ void RotateMatrixByEuler(double M[3][3], double Euler[3])
    M[2][0] =  -CosPitch * SinRoll;
    M[2][1] =  SinPitch;
    M[2][2] =  CosPitch * CosRoll;
+
+   MM[3][3];
+   RotateMatrixY(MM, Euler[2]);
 }
 //---------------------------------------------------------------------------
 void EulerByTriangle(double Euler[3], double Vx[3], double Vy[3])

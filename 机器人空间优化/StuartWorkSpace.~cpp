@@ -49,7 +49,7 @@ bool CStuartWorkSpace::IsFeasible(int X, int Y, int Z)
       if(Robot.Constrained)
          return false;
       else
-      {          /*
+      {
          double Force[3] = {0, 0, -1};
          double Torque[3] = {0, 0, 0};
          if(!Robot.CalcForceOfJacks(Force, Torque))
@@ -68,7 +68,11 @@ bool CStuartWorkSpace::IsFeasible(int X, int Y, int Z)
 
          if(MaxForce > 5.0 || MinForce < -5.0)
             return false;
-            */      
+
+         if(MinForce < MinJackForce)
+            MinJackForce = MinForce;
+         if(MaxForce > MaxJackForce)
+            MaxJackForce = MaxForce;
       }
    }
 

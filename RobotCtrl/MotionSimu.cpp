@@ -237,12 +237,12 @@ void CMotionSimulator::GetPlatformPosition(double &X, double &Y, double &Z, doub
    Roll  = RSpd2Rotate[2].Output(FilteredInput[5]);
 
    // 由Y、X方向上的加速度计算俯仰角和滚转角，通过重力模拟持续加速度
-   Pitch -= Acc2Angle[0].Output(__Input[1]);   // 俯仰角产生Y方向加速度
-   Roll  -= Acc2Angle[1].Output(__Input[0]);   // 俯仰角产生X方向加速度
+   //Pitch -= Acc2Angle[0].Output(__Input[1]);   // 俯仰角产生Y方向加速度
+   //Roll  -= Acc2Angle[1].Output(__Input[0]);   // 俯仰角产生X方向加速度
 
    // 实际模拟结果
-   __Simulated[0] = Acc2Motion[0].RealAcc() + Acc2Angle[0].RealAcc();
-   __Simulated[1] = Acc2Motion[1].RealAcc() + Acc2Angle[1].RealAcc();
+   __Simulated[0] = Acc2Motion[0].RealAcc();// + Acc2Angle[0].RealAcc();
+   __Simulated[1] = Acc2Motion[1].RealAcc();// + Acc2Angle[1].RealAcc();
    __Simulated[2] = Acc2Motion[2].RealAcc();
    __Simulated[3] = RSpd2Rotate[0].RealSpd();
    __Simulated[4] = RSpd2Rotate[1].RealSpd();

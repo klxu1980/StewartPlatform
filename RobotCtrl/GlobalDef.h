@@ -134,18 +134,18 @@
 #define MAX_LINEAR_ACC  0.5      // 最大直线加速度(m/s^2)
 
 #define MAX_SPEED_X     0.3    // x轴的最大线速度
-#define MAX_RANGE_X     0.038   // x轴的最大运动距离(以中心点为原点)
+#define MAX_RANGE_X     0.5    //0.038   // x轴的最大运动距离(以中心点为原点)
 
 #define MAX_SPEED_Y     0.3    // y轴的最大线速度
-#define MAX_RANGE_Y     0.078   // y轴的最大运动距离(以中心点为原点)
+#define MAX_RANGE_Y     0.5    //0.078   // y轴的最大运动距离(以中心点为原点)
 
 #define MAX_SPEED_Z     0.3    // z轴的最大线速度
-#define MAX_RANGE_Z     0.038   // z轴的最大运动距离(以中心点为原点)
+#define MAX_RANGE_Z     0.5    //0.038   // z轴的最大运动距离(以中心点为原点)
 
 #define MAX_ROTARY_SPD  20     // 最大角速度(deg/s)
 #define MAX_YAW         5
-#define MAX_PITCH       10
-#define MAX_ROLL        10
+#define MAX_PITCH       15
+#define MAX_ROLL        25
 
 // 减摆控制
 // 由于减摆控制需要使用UART2和UART3，因此减摆控制时，无法进行正常的上位机通信控制
@@ -171,7 +171,7 @@
 
 // 控制器归零速度
 #define GO_ZERO_RPM          100     // 归零转速
-#define ZERO_2_CENTER_SPD    0.01    // 由零点向中心点移动速度(m/s)
+#define ZERO_2_CENTER_SPD    0.1   //0.01    // 由零点向中心点移动速度(m/s)
 
 // 伺服最大转速变化(0RPM到SERVO_RPM_MAX)所需要的加速时间
 // 通过该时间计算最大允许加速度，从而避免伺服出现猛烈振动

@@ -234,6 +234,9 @@ void RotateMatrixByEuler(double M[3][3], double Euler[3])
    M[2][0] =  -CosPitch * SinRoll;
    M[2][1] =  SinPitch;
    M[2][2] =  CosPitch * CosRoll;
+
+   double MM[3][3];
+   RotateMatrixY(MM, Euler[2]);
 }
 //---------------------------------------------------------------------------
 void EulerByTriangle(double Euler[3], double Vx[3], double Vy[3])

@@ -231,7 +231,7 @@ void CROSServo::ServoCtrl(void)
    if(Form1->ListViewJacks->Items->Count)
    {
       for(int i = 0; i < 6; ++i)
-         Form1->ListViewJacks->Items->Item[i]->SubItems->Strings[0] = AnsiString().sprintf("%8.1f", __CurPosition[i]);
+         Form1->ListViewJacks->Items->Item[i]->SubItems->Strings[0] = AnsiString().sprintf("%8.3f", __CurPosition[i]);
    }
 #endif
 }
